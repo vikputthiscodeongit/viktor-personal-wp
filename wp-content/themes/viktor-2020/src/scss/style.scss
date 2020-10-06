@@ -1,0 +1,147 @@
+// SASS rem
+@import "~sass-rem/rem";
+
+
+// Bootstrap
+// Functions, variables and mixins
+@import "~bootstrap/scss/functions";
+@import "vars/bootstrap";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+// Components
+// @import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+// @import "~bootstrap/scss/type";
+// @import "~bootstrap/scss/images";
+// @import "~bootstrap/scss/code";
+@import "~bootstrap/scss/grid";
+// @import "~bootstrap/scss/tables";
+// @import "~bootstrap/scss/forms";
+// @import "~bootstrap/scss/buttons";
+// @import "~bootstrap/scss/transitions";
+// @import "~bootstrap/scss/dropdown";
+// @import "~bootstrap/scss/button-group";
+// @import "~bootstrap/scss/input-group";
+// @import "~bootstrap/scss/custom-forms";
+// @import "~bootstrap/scss/nav";
+// @import "~bootstrap/scss/navbar";
+// @import "~bootstrap/scss/card";
+// @import "~bootstrap/scss/breadcrumb";
+// @import "~bootstrap/scss/pagination";
+// @import "~bootstrap/scss/badge";
+// @import "~bootstrap/scss/jumbotron";
+// @import "~bootstrap/scss/alert";
+// @import "~bootstrap/scss/progress";
+// @import "~bootstrap/scss/media";
+// @import "~bootstrap/scss/list-group";
+// @import "~bootstrap/scss/close";
+// @import "~bootstrap/scss/toasts";
+// @import "~bootstrap/scss/modal";
+// @import "~bootstrap/scss/tooltip";
+// @import "~bootstrap/scss/popover";
+// @import "~bootstrap/scss/carousel";
+// @import "~bootstrap/scss/spinners";
+
+// Utilities
+// @import "~bootstrap/scss/utilities/align";
+// @import "~bootstrap/scss/utilities/background";
+// @import "~bootstrap/scss/utilities/borders";
+// @import "~bootstrap/scss/utilities/clearfix";
+// @import "~bootstrap/scss/utilities/display";
+// @import "~bootstrap/scss/utilities/embed";
+// @import "~bootstrap/scss/utilities/flex";
+// @import "~bootstrap/scss/utilities/float";
+// @import "~bootstrap/scss/utilities/overflow";
+// @import "~bootstrap/scss/utilities/position";
+@import "~bootstrap/scss/utilities/screenreaders";
+// @import "~bootstrap/scss/utilities/shadows";
+// @import "~bootstrap/scss/utilities/sizing";
+// @import "~bootstrap/scss/utilities/stretched-link";
+// @import "~bootstrap/scss/utilities/spacing";
+// @import "~bootstrap/scss/utilities/text";
+// @import "~bootstrap/scss/utilities/visibility";
+
+// Print
+// @import "~bootstrap/scss/print";
+
+
+// Project
+// Variables
+@import "vars/custom";
+
+
+// Other modules
+// They go here.
+
+
+// Project
+// Mixins
+@import "mixins/helpers/browserhacks";
+@import "mixins/helpers/rwd";
+@import "mixins/sizing";
+
+// Utilities
+@import "utils/animations";
+@import "utils/ratio";
+
+// Components
+@import "components/layout";
+@import "components/type";
+@import "components/button";
+@import "components/form";
+@import "components/loader";
+@import "components/media";
+@import "components/nav";
+
+
+body {
+    // DEZE MEDIA QUERY WORDT ONTERECHT GETRIGGERED OP DE LATITUDE @ CHROME (en mogelijk FF).
+    @media (-webkit-min-device-pixel-ratio: 2) {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+ol, ul {
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+a {
+    text-decoration: transparent solid underline;
+    transition: $transition-fast;
+    transition-property: text-decoration-color, color;
+
+    &:hover {
+        text-decoration-color: currentColor;
+        color: $blue;
+    }
+
+    &:focus {
+        outline: rem(2px) solid currentColor; // Not defining outline-color as currentColor results in :focus outline-color equalling <body> color in IE.
+        outline-offset: rem(2px);
+
+        .using-mouse & {
+            outline: none;
+        }
+    }
+}
+
+.site-settings {
+    margin-bottom: 0;
+
+    &__item {
+        margin-bottom: rem(30px);
+        list-style: none;
+
+        @include respond-above(md) {
+            margin-bottom: rem(40px);
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

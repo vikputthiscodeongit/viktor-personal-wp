@@ -1,0 +1,107 @@
+// Color system
+$off-white-light: #F5F5F5;
+$off-white-dark:  #EEEEEE;
+$gray-light:      #BFBFBF;
+$gray:            #808080;
+$gray-base:       $gray;
+$black:           #000000;
+
+$grays: ();
+$grays: map-merge(
+  (
+    "light": $gray-light,
+    "base":  $gray-base
+  ),
+  $grays
+);
+
+$blue:      #007bff;
+$turquoise: #4CB6A5;
+
+$colors: ();
+$colors: map-merge(
+  (
+    "turquoise":       $turquoise,
+    "off-white-light": $off-white-light,
+    "off-white-dark":  $off-white-dark,
+    "gray-light":      $gray-light,
+    "gray":            $gray,
+    "gray-base":       $gray-base
+  ),
+  $colors
+);
+
+$primary:   $turquoise;
+$secondary: $blue;
+$light:     $off-white-dark;
+
+$theme-colors: ();
+$theme-colors: map-merge(
+  (
+    "primary":   $primary,
+    "secondary": $secondary,
+    "light":     $light
+  ),
+  $theme-colors
+);
+
+
+// Body
+$body-color:                $black;
+
+
+// Grid breakpoints
+$grid-breakpoints: (
+    xxxs: 0,
+    xxs: 320px,
+    xs: 375px,
+    sm: 568px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1920px,
+    xxxl: 2560px
+);
+
+
+// Grid containers
+$container-max-widths: (
+    xxs: 479px,
+    xs: 539px,
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px,
+    xxl: 1280px,
+    xxxl: 1366px
+);
+
+
+// Grid columns
+$grid-gutter-width:                rem(40px);
+
+
+// Components
+// $line-height-lg:              1.666666;
+
+// Typography
+$font-family-sans-serif:      "Miriam Libre", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-monospace:       "Fira Code", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-base:            $font-family-sans-serif;
+
+// $font-size-lg:                rem(18px);
+$font-size-sm:                rem(15px);
+
+$line-height-base:            1.625;
+
+$h1-font-size:                rem(32px);
+$h2-font-size:                rem(24px);
+
+$headings-font-family:        $font-family-monospace;
+$headings-font-weight:        600;
+
+
+// Variable export to JS
+:export {
+    bpWidthMd: map-get($grid-breakpoints, md);
+}

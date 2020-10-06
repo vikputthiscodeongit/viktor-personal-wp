@@ -1,0 +1,199 @@
+.form {
+    &:not(:only-child) {
+        &:last-child {
+            margin-top: rem(24px);
+
+            @include respond-above(xxs) {
+                margin-top: rem(30px);
+            }
+
+            @include respond-above(md) {
+                margin-top: rem(40px);
+            }
+        }
+    }
+
+    &--contact {
+        max-width: rem(640px);
+
+        @include respond-above(xl) {
+            min-width: rem(800px);
+        }
+
+        @include respond-above(xxl) {
+            min-width: rem(960px);
+        }
+    }
+
+    &__group {
+        margin-top: rem(25px);
+
+        @include respond-above(md) {
+            margin-top: rem(35px);
+        }
+
+        &--ifl {
+            .js & {
+                position: relative;
+                margin-top: rem(20px);
+
+                @include respond-above(md) {
+                    margin-top: rem(30px);
+                }
+
+                &:first-child {
+                    margin-top: rem(-5px);
+                }
+            }
+        }
+
+        &--mt-big {
+            margin-top: rem(35px);
+
+            @include respond-above(md) {
+                margin-top: rem(45px);
+            }
+
+            .js .form__group--ifl + & {
+                margin-top: rem(30px);
+
+                @include respond-above(md) {
+                    margin-top: rem(40px);
+                }
+            }
+        }
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    &__label {
+        display: block;
+        font-family: $headings-font-family;
+        font-weight: 600;
+
+        .js .form__group--ifl & {
+            position: absolute;
+            top: rem(2px);
+            left: rem(2px);
+            right: rem(2px);
+            margin-bottom: 0;
+            padding: rem(12px) rem(10px) rem(4px);
+            line-height: 1;
+            font-size: rem(12px);
+            font-weight: 400;
+            color: $blue;
+            background-color: $off-white-dark;
+            border-top-left-radius: rem(4px);
+            border-top-right-radius: rem(4px);
+
+            @media (prefers-contrast: high) {
+                background-color: $white;
+            }
+
+            @include respond-above(xxs) {
+                padding: rem(13px) rem(12px) rem(5px);
+                font-size: rem(13px);
+            }
+        }
+    }
+
+    &__input {
+        width: 100%;
+        padding: rem(10px);
+        background-color: $off-white-dark;
+        border: rem(2px) solid $off-white-dark;
+        border-radius: rem(4px);
+        transition: border-color $transition-fast;
+
+        @media (prefers-contrast: high) {
+            background-color: $white;
+            border-color: $black;
+        }
+
+        @include respond-above(xxs) {
+            padding: rem(12px);
+        }
+
+        @include respond-above(md) {
+            line-height: 1.625;
+            font-size: rem($font-size-base);
+        }
+
+        &--email,
+        &--text {
+            .js .form__group--ifl & {
+                height: rem(64px); // Setting a fixed height is sadly the only way to guarantee consistent appearance across browsers.
+
+                @include respond-above(xxs) {
+                    height: rem(69px);
+                }
+            }
+        }
+
+        &--textarea {
+            display: block;
+        }
+
+        .js .form__group--ifl & {
+            padding-top: rem(28px);
+            padding-bottom: rem(7px);
+
+            @include respond-above(xxs) {
+                padding-top: rem(31px);
+                padding-bottom: rem(8px);
+            }
+        }
+
+        &:focus {
+            border-color: $blue;
+            outline: none;
+        }
+
+        &:valid {
+            border-color: $green;
+        }
+
+        //
+        // Reset default :invalid styles.
+        // General (IE, maybe more)
+        &:invalid {
+            outline: none;
+        }
+
+        // Gecko - https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-ui-invalid
+        &:-moz-ui-invalid {
+            box-shadow: none;
+        }
+
+        //
+        // Autocomplete styling for WebKit-based browsers.
+        &:-webkit-autofill,
+        &:-internal-autofill-selected {
+            box-shadow: 0 0 0 1000px $off-white-dark inset;
+
+            @media (prefers-contrast: high) {
+                box-shadow: 0 0 0 1000px $white inset;
+            }
+        }
+
+        //
+        // Input placeholder styling
+        &::-webkit-input-placeholder {
+            color: $gray;
+        }
+
+        &::-moz-placeholder {
+            color: $gray;
+        }
+
+        &:-ms-input-placeholder {
+            color: $gray;
+        }
+
+        &::placeholder {
+            color: $gray;
+        }
+    }
+}

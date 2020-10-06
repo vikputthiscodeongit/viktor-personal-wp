@@ -1,0 +1,61 @@
+FONTS
+____________________
+
+Family:
+ * TBD
+
+Website:
+ * TBD
+
+License:
+ * TBD
+
+Modifications made:
+ * TBD
+____________________
+
+Family:
+ * TBD
+
+Website:
+ * TBD
+
+License:
+ * TBD
+
+Modifications made:
+ * TBD
+____________________
+
+Family:
+ * TBD
+
+Website:
+ * TBD
+
+License:
+ * TBD
+
+Modifications made:
+ * TBD
+____________________
+
+
+
+ICONS
+____________________
+
+Name:
+ * icon-linkedin-color-64x64.png
+
+Original name:
+ * LI-In-Bug
+
+Downloaded from:
+ * https://brand.linkedin.com/downloads
+
+Modifications made:
+ * Removed the copyright mark due to space constraints.
+ * Resized the image to 64 by 64 pixels.
+ * Reduced the image color space to 32 colors.
+____________________

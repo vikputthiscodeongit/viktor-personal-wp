@@ -1,0 +1,60 @@
+// Aspect ratio box
+@mixin aspect-ratio($width: $ratio-width, $height: $ratio-height) {
+    @if $width == "" or $height == "" {
+        @if $width == "" {
+            @warn "Aspect ratio: not set. Defaulting to '3 / 2'.";
+
+            $width: 3;
+            $height: 2;
+        }
+        @if $height == "" {
+            @warn "Aspect ratio: height isn't set. Defaulting to '2'.";
+
+            $height: 2;
+        }
+    }
+
+    position: relative;
+
+    &::before {
+        content: "";
+        float: left;
+        display: block;
+        width: 1px;
+        height: 0;
+        margin-left: -1px;
+        padding-top: ($height / $width) * 100%;
+        opacity: 0;
+    }
+
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    > .content,
+    > .media__wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    > .media__wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        > .img-fit,
+        > video,
+        > iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            font-family: "object-fit: cover;"; // Add support for object-fit-images polyfill.
+        }
+    }
+}

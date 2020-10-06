@@ -1,0 +1,39 @@
+// https://projects.lukehaas.me/css-loaders/
+.loader {
+    position: relative;
+    width: 11em;
+    height: 11em;
+    margin: rem(50px) auto;
+    text-indent: -9999em;
+    font-size: rem(10px);
+    background: $white;
+    background: linear-gradient(to right, $white 10%, rgba(255, 255, 255, 0) 42%);
+    border-radius: 50%;
+    transform: translateZ(0);
+    animation: spin 1.4s infinite linear;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    &::before {
+        width: 50%;
+        height: 50%;
+        background: $white;
+        border-radius: 100% 0 0 0;
+    }
+
+    &::after {
+        bottom: 0;
+        right: 0;
+        width: 75%;
+        height: 75%;
+        margin: auto; // Deze is misschien niet nodig.
+        background: #0dc5c1;
+        border-radius: 50%;
+    }
+}

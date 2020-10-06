@@ -1,0 +1,54 @@
+h1, .h1,
+h2, .h2 {
+    line-height: $headings-line-height;
+    font-family: $headings-font-family;
+    font-weight: $headings-font-weight;
+}
+
+h1, h2 {
+    margin-bottom: 0;
+}
+
+h1 {
+    font-size: $h1-font-size;
+}
+
+h2 {
+    font-size: $h2-font-size;
+}
+
+.title {
+    margin-bottom: rem(20px);
+
+    @include respond-above(xxs) {
+        margin-bottom: rem(24px);
+    }
+
+    @include respond-above(md) {
+        margin-bottom: rem(30px);
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+p {
+    margin-bottom: rem(16px);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.text {
+    margin-bottom: rem(16px);
+
+    @include respond-above(xxs) {
+        margin-bottom: rem(20px);
+    }
+
+    @include respond-above(md) {
+        margin-bottom: rem(24px);
+    }
+}
