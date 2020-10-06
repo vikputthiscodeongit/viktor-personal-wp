@@ -94,21 +94,4 @@
 @import "components/loader";
 @import "components/media";
 @import "components/nav";
-
-
-.site-settings {
-    margin-bottom: 0;
-
-    &__item {
-        margin-bottom: rem(30px);
-        list-style: none;
-
-        @include respond-above(md) {
-            margin-bottom: rem(40px);
-        }
-
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
-}
+@import "components/settings";
