@@ -50,6 +50,11 @@ $theme-colors: map-merge(
 $body-color:                $black;
 
 
+// Links
+$link-decoration:                         transparent solid underline;
+$link-hover-decoration:                   currentColor solid underline;
+
+
 // Grid breakpoints
 $grid-breakpoints: (
     xxxs: 0,
@@ -92,7 +97,7 @@ $font-family-monospace:       "Fira Code", SFMono-Regular, Menlo, Monaco, Consol
 $font-family-base:            $font-family-sans-serif;
 
 // $font-size-lg:                rem(18px);
-$font-size-sm:                rem(15px);
+// $font-size-sm:                rem(15px);
 
 $line-height-base:            1.625;
 

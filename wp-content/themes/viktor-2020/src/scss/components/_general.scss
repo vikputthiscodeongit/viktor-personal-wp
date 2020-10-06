@@ -1,0 +1,48 @@
+html {
+    // font-size: $font-size-sm;
+
+    // @include respond-above(xxs) {
+    //     font-size: $font-size-base;
+    // }
+
+    // @include respond-above(md) {
+    //     font-size: $font-size-lg;
+    // }
+}
+
+body {
+    min-width: $body-min-width;
+    margin-left: auto;
+    margin-right: auto;
+    text-size-adjust: 100%;
+
+    // @include respond-above(md) {
+    //     line-height: $line-height-lg;
+    // }
+
+    // TODO: DEZE MEDIA QUERY WORDT ONTERECHT GETRIGGERED OP MIJN LAPTOP IN CHROME (en mogelijk Firefox).
+    @media (-webkit-min-device-pixel-ratio: 2) {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+ol, ul {
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+a {
+    transition: $transition-base;
+    transition-property: text-decoration-color, color;
+
+    &:focus {
+        outline: rem(2px) solid currentColor; // Not defining outline-color as currentColor results in :focus outline-color equalling <body> color in IE.
+        outline-offset: rem(2px);
+
+        .using-mouse & {
+            outline: none;
+        }
+    }
+}

@@ -86,6 +86,7 @@
 @import "utils/ratio";
 
 // Components
+@import "components/general";
 @import "components/layout";
 @import "components/type";
 @import "components/button";
@@ -94,40 +95,6 @@
 @import "components/media";
 @import "components/nav";
 
-
-body {
-    // DEZE MEDIA QUERY WORDT ONTERECHT GETRIGGERED OP DE LATITUDE @ CHROME (en mogelijk FF).
-    @media (-webkit-min-device-pixel-ratio: 2) {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-}
-
-ol, ul {
-    &:last-child {
-        margin-bottom: 0;
-    }
-}
-
-a {
-    text-decoration: transparent solid underline;
-    transition: $transition-fast;
-    transition-property: text-decoration-color, color;
-
-    &:hover {
-        text-decoration-color: currentColor;
-        color: $blue;
-    }
-
-    &:focus {
-        outline: rem(2px) solid currentColor; // Not defining outline-color as currentColor results in :focus outline-color equalling <body> color in IE.
-        outline-offset: rem(2px);
-
-        .using-mouse & {
-            outline: none;
-        }
-    }
-}
 
 .site-settings {
     margin-bottom: 0;

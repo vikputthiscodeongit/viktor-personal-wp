@@ -1,26 +1,3 @@
-html {
-    font-size: $font-size-sm;
-
-    @include respond-above(xxs) {
-        font-size: $font-size-base;
-    }
-
-    // @include respond-above(md) {
-    //     font-size: $font-size-lg;
-    // }
-}
-
-body {
-    min-width: $body-min-width;
-    margin-left: auto;
-    margin-right: auto;
-    text-size-adjust: 100%;
-
-    // @include respond-above(md) {
-    //     line-height: $line-height-lg;
-    // }
-}
-
 .site-header {
     position: fixed;
     z-index: 10;
