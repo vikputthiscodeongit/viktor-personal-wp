@@ -105,7 +105,7 @@
         background-color: $off-white-dark;
         border: rem(2px) solid $off-white-dark;
         border-radius: rem(4px);
-        transition: border-color $transition-fast;
+        transition: border-color $transition-base;
 
         @media (prefers-contrast: high) {
             background-color: $white;

@@ -37,7 +37,7 @@
         opacity: 0.4;
         text-align: center;
         color: $black;
-        transition: $transition-fast;
+        transition: $transition-base;
         transition-property: opacity, color;
 
         @include respond-above(sm) {
@@ -79,7 +79,7 @@
             height: rem($height);
             opacity: 0;
             background-color: currentColor;
-            transition: opacity $transition-fast;
+            transition: opacity $transition-base;
 
             @at-root a:hover::after,
                      a[aria-current="page"]::after {
