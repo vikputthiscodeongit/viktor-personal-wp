@@ -1,15 +1,15 @@
 .ratio {
-	@include aspect-ratio($ratio-width, $ratio-height);
+    @include aspect-ratio($ratio-width, $ratio-height);
 
-	&--default {
-		@include aspect-ratio($ratio-width, $ratio-height);
-	}
+    &--default {
+        @include aspect-ratio($ratio-width, $ratio-height);
+    }
 
-	&--square {
-		@include aspect-ratio(1, 1);
-	}
+    &--square {
+        @include aspect-ratio(1, 1);
+    }
 
-	&--wide {
-		@include aspect-ratio(16, 9);
-	}
+    &--wide {
+        @include aspect-ratio(16, 9);
+    }
 }
