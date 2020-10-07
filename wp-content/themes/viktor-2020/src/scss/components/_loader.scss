@@ -1,13 +1,13 @@
-// https://projects.lukehaas.me/css-loaders/
+// https://projects.lukehaas.me/css-loaders/, SASSified.
 .loader {
     position: relative;
     width: 11em;
     height: 11em;
-    margin: rem(50px) auto;
+    margin: rem(50px) auto; // Will most likely change
     text-indent: -9999em;
     font-size: rem(10px);
-    background: $white;
-    background: linear-gradient(to right, $white 10%, rgba(255, 255, 255, 0) 42%);
+    background: $white; // Will most likely change
+    background: linear-gradient(to right, $white 10%, rgba(255, 255, 255, 0) 42%); // Will most likely change
     border-radius: 50%;
     transform: translateZ(0);
     animation: spin 1.4s infinite linear;
@@ -23,7 +23,7 @@
     &::before {
         width: 50%;
         height: 50%;
-        background: $white;
+        background: $white; // Will most likely change
         border-radius: 100% 0 0 0;
     }
 
@@ -32,8 +32,8 @@
         right: 0;
         width: 75%;
         height: 75%;
-        margin: auto; // Deze is misschien niet nodig.
-        background: #0dc5c1;
+        margin: auto; // May be unnecessary property
+        background: #0dc5c1; // Will most likely change
         border-radius: 50%;
     }
 }

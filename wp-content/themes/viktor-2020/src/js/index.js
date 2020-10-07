@@ -13,7 +13,7 @@ import stylesheet from "../scss/style.scss";
         return window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
     };
 
-    // Check if viewport width and height is above the "md" breakpoint
+    // Check if viewport width is above the "md" breakpoint
     let aboveBpWidthMd = function aboveBpWidthMd() {
         const aboveBpWidthMd = window.matchMedia("(min-width: " + stylesheet.bpWidthMd + ")");
 
