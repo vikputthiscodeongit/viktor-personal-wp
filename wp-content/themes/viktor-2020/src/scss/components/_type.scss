@@ -5,10 +5,6 @@ h2, .h2 {
     font-weight: $headings-font-weight;
 }
 
-h1, h2 {
-    margin-bottom: 0;
-}
-
 h1 {
     font-size: $h1-font-size;
 }
@@ -34,8 +30,6 @@ h2 {
 }
 
 p {
-    margin-bottom: rem(16px);
-
     &:last-child {
         margin-bottom: 0;
     }
