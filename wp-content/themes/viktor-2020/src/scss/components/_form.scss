@@ -3,13 +3,8 @@
         &:last-child {
             margin-top: rem(24px);
 
-            @include respond-above(xxs) {
-                margin-top: rem(30px);
-            }
-
-            @include respond-above(md) {
-                margin-top: rem(40px);
-            }
+        @include respond-above(md) {
+            margin-top: rem(40px);
         }
     }
 
@@ -21,7 +16,7 @@
         }
 
         @include respond-above(xxl) {
-            min-width: rem(960px);
+            min-width: rem(880px);
         }
     }
 
@@ -91,11 +86,6 @@
             @media (prefers-contrast: high) {
                 background-color: $white;
             }
-
-            @include respond-above(xxs) {
-                padding: rem(13px) rem(12px) rem(5px);
-                font-size: rem(13px);
-            }
         }
     }
 
@@ -112,23 +102,10 @@
             border-color: $black;
         }
 
-        @include respond-above(xxs) {
-            padding: rem(12px);
-        }
-
-        @include respond-above(md) {
-            line-height: 1.625;
-            font-size: rem($font-size-base);
-        }
-
         &--email,
         &--text {
             .js .form__group--ifl & {
-                height: rem(64px); // Setting a fixed height is sadly the only way to guarantee consistent appearance across browsers.
-
-                @include respond-above(xxs) {
-                    height: rem(69px);
-                }
+                height: rem(69px); // Setting a fixed height is sadly the only way to guarantee consistent appearance across browsers.
             }
         }
 
@@ -137,13 +114,10 @@
         }
 
         .js .form__group--ifl & {
-            padding-top: rem(28px);
-            padding-bottom: rem(7px);
+            padding-top: rem(31px);
+            padding-bottom: rem(8px);
+        }
 
-            @include respond-above(xxs) {
-                padding-top: rem(31px);
-                padding-bottom: rem(8px);
-            }
         }
 
         &:focus {
