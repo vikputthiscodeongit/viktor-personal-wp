@@ -77,8 +77,8 @@
 
 // Project
 // Mixins
+@import "mixins/helpers/breakpoints";
 @import "mixins/helpers/browserhacks";
-@import "mixins/helpers/rwd";
 @import "mixins/sizing";
 
 // Utilities
