@@ -4,39 +4,19 @@
     get_header();
 ?>
 
-<section class="section">
+<section class="site-section">
     <div class="container">
-        <div class="section__header">
-            <?php
-                $title = get_the_title();
-                if (!empty($title)) {
-                    ?>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="title">
-                                <h1>
-                                    <?php echo $title; ?>
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                }
-            ?>
-        </div>
-
-        <div class="section__body">
-            <div class="row">
-                <div class="col-12">
-                    <?php
-                        if (!empty(get_the_content())) {
-                            ?>
-                            <div class="text">
-                                <?php the_content(); ?>
-                            </div>
-                            <?php
-                        }
-                    ?>
+        <?php
+            $title = get_the_title();
+            if (!empty($title)) {
+                ?>
+                <div class="title">
+                    <h1>
+                        <?php echo $title; ?>
+                    </h1>
+                </div>
+                <?php
+            }
 
                     <?php
                         // foreach ($section_extras as $form) {
@@ -61,9 +41,11 @@
                             <?php
                         // }
                     ?>
+            if (!empty(get_the_content())) {
+                ?>
+                <div class="text">
+                    <?php the_content(); ?>
                 </div>
-            </div>
-        </div>
     </div>
 </section>
 

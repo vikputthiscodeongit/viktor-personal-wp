@@ -1,15 +1,9 @@
 <?php get_header(); ?>
 
-<section class="section">
+<section class="site-section">
     <div class="container">
-        <div class="section__header">
-            <div class="row">
-                <div class="col-12">
-                    <div class="title">
-                        <h1>Viktor Chin</h1>
-                    </div>
-                </div>
-            </div>
+        <div class="title">
+            <h1>Viktor Chin</h1>
         </div>
     </div>
 </section>
