@@ -1,15 +1,13 @@
 .btn {
     width: 100%;
-    padding: rem(14px) rem(22px);
+    padding: $btn-padding-y $btn-padding-x;
     text-decoration: none;
-    line-height: 1;
-    font-family: $headings-font-family;
-    font-weight: 400;
+    font: $btn-font-weight $btn-font-size/$btn-line-height $btn-font-family;
     color: $white;
     background-color: $blue;
     border: none;
-    border-radius: rem(100px);
-    transition: 0.2s ease-in-out;
+    border-radius: $btn-border-radius;
+    transition: $btn-transition;
     transition-property: background-color, box-shadow;
 
     @include respond-above(xs) {
