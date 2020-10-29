@@ -9,8 +9,7 @@
   "author": "Viktor",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.5.2",
-    "jquery": "^3.5.1"
+    "bootstrap": "^4.5.3"
   },
   "devDependencies": {
     "autoprefixer": "^9.8.6",

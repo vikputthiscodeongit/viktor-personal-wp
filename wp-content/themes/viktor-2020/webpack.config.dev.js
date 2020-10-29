@@ -22,11 +22,6 @@ module.exports = {
     devtool: "inline-source-map",
 
     plugins: [
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery",
-            "window.jQuery": "jquery"
-        }),
         new MiniCssExtractPlugin({
             filename: "./css/style.css"
         }),
