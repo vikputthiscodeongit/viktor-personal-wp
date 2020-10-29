@@ -1,7 +1,27 @@
 import stylesheet from "../scss/style.scss";
 
 (function() {
+    //
+    // For debugging purposes.
+    let debugMode = {
+        set: process.env.NODE_ENV === "production" ? false : true,
 
+        createEl: function() {
+            const debugElWrapper = document.createElement("div");
+            debugElWrapper.classList.add("container");
+
+            const debugEl = document.createElement("div");
+            debugEl.classList.add("debug-el");
+
+            const debugElInner = document.createElement("p");
+            debugElInner.textContent = "! Debugging mode is enabled !";
+
+            debugElWrapper.appendChild(debugEl);
+            debugEl.appendChild(debugElInner);
+
+            const main = document.querySelector("main");
+            main.insertBefore(debugElWrapper, main.firstElementChild);
+        }
     };
 
 
@@ -15,6 +35,10 @@ import stylesheet from "../scss/style.scss";
     const html = document.querySelector("html");
 
     html.className = html.className.replace("no-js", "js");
+
+    if (debugMode.set) {
+        debugMode.createEl();
+    }
 
     //
     // Event handlers
