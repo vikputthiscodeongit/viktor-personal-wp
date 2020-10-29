@@ -211,9 +211,9 @@ class Viktor_2020 extends Walker_Nav_Menu {
 
 		$icon = get_field('page_icon', $item->object_id);
 		if ($icon) {
-			$div_open = '<div class=\'site-navigation__icon\'>';
+			$div_open = '<span class=\'site-navigation__icon\'>';
 			$img = '<img src="' . esc_attr($icon['url']) . '" alt="">';
-			$div_close = '</div>';
+			$div_close = '</span>';
 			$icon_elem = $div_open . $img . $div_close;
 		}
 
@@ -235,9 +235,9 @@ class Viktor_2020 extends Walker_Nav_Menu {
 		$item_output  = $args->before;
 		$item_output .= '<a' . $attributes . '>';
 		$item_output .= $icon ? $icon_elem : false;
-		$item_output .= '<div class="site-navigation__title">';
+		$item_output .= '<span class="site-navigation__title">';
 		$item_output .= '<span>' . $args->link_before . $title . $args->link_after . '</span>';
-		$item_output .= '</div>';
+		$item_output .= '</span>';
 		$item_output .= '</a>';
 		$item_output .= $args->after;
 
