@@ -1,0 +1,33 @@
+.alert {
+    position: absolute;
+    top: rem(16px);
+    left: 50%;
+    z-index: -100;
+    padding: $alert-padding-y $alert-padding-x;
+    visibility: hidden;
+    opacity: 0;
+    font-size: rem(15px);
+    background-color: $white;
+    border-radius: $border-radius;
+    box-shadow: $alert-box-shadow;
+    transform: translateX(-50%);
+    transition: $alert-transition;
+    transition-property: z-index, visibility, opacity;
+
+    &--form {
+        &:not(.alert--mail_sent) {
+            background-color: $warning;
+        }
+
+        &.alert--mail_sent {
+            color: $white;
+            background-color: $success;
+        }
+    }
+
+    &.is-visible {
+        z-index: 100;
+        visibility: visible;
+        opacity: 1;
+    }
+}

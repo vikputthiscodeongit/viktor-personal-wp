@@ -40,6 +40,9 @@
   ?>
 
   <body <?php body_class(); ?>>
+    <div class="alert">
+        <p></p>
+    </div>
 
     <header class="site-header" id="site-header">
         <div class="site-menu">

@@ -111,6 +111,16 @@ $btn-border-radius:           rem(100px);
 $btn-transition:              0.2s ease-in-out;
 
 
+// Alerts
+$alert-padding-y:                   rem(14px);
+$alert-padding-x:                   rem(10px);
+
+$alert-border-radius:               rem(4px);
+$alert-box-shadow:                  0 0 rem(4px) rem(1px) rgba(0, 0, 0, 0.333333); // Not a Bootstrap variable.
+
+$alert-transition:                  0.166666s cubic-bezier(0.4, 0, 1, 1);          // Not a Bootstrap variable.
+
+
 // Variable export to JS
 :export {
     mdBreakpoint: map-get($grid-breakpoints, md);
