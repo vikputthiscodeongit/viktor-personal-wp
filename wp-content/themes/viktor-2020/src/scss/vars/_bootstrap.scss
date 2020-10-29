@@ -6,43 +6,31 @@ $gray:            #808080;
 $gray-base:       $gray;
 $black:           #000000;
 
-$grays: ();
-$grays: map-merge(
-  (
+$grays: (
     "light": $gray-light,
     "base":  $gray-base
-  ),
-  $grays
 );
 
-$blue:      #007bff;
+$blue:      #007BFF;
 $turquoise: #4CB6A5;
 
-$colors: ();
-$colors: map-merge(
-  (
+$colors: (
     "turquoise":       $turquoise,
     "off-white-light": $off-white-light,
     "off-white-dark":  $off-white-dark,
     "gray-light":      $gray-light,
     "gray":            $gray,
     "gray-base":       $gray-base
-  ),
-  $colors
 );
 
 $primary:   $turquoise;
 $secondary: $blue;
 $light:     $off-white-dark;
 
-$theme-colors: ();
-$theme-colors: map-merge(
-  (
+$theme-colors: (
     "primary":   $primary,
     "secondary": $secondary,
     "light":     $light
-  ),
-  $theme-colors
 );
 
 
@@ -85,8 +73,6 @@ $grid-gutter-width:                rem(40px);
 
 
 // Components
-// $line-height-lg:              1.666666;
-
 $transition-base:             0.1s linear;
 
 
@@ -127,5 +113,5 @@ $btn-transition:              0.2s ease-in-out;
 
 // Variable export to JS
 :export {
-    bpWidthMd: map-get($grid-breakpoints, md);
+    mdBreakpoint: map-get($grid-breakpoints, md);
 }

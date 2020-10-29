@@ -90,10 +90,12 @@
     function remove_admin_bar_links() {
         global $wp_admin_bar;
 
+        // WordPress Core
         $wp_admin_bar->remove_menu("wp-logo"); // WordPress logo & its sub-menu items
         $wp_admin_bar->remove_menu("comments"); // Comments
         $wp_admin_bar->remove_menu("new-user"); // New - user
 
+        // Plugins
         // $wp_admin_bar->remove_menu("wpseo-menu"); // Yoast SEO
     }
     add_action("wp_before_admin_bar_render", "remove_admin_bar_links", 999);
