@@ -14,10 +14,6 @@
         width: auto;
     }
 
-    @include respond-above(md) {
-        font-size: rem($font-size-base);
-    }
-
     &:hover {
         background-color: darken($blue, 5%);
     }
