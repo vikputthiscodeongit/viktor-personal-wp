@@ -1,7 +1,6 @@
 .form {
-    &:not(:only-child) {
-        &:last-child {
-            margin-top: rem(24px);
+    * + & {
+        margin-top: rem(30px);
 
         @include respond-above(md) {
             margin-top: rem(40px);
@@ -27,17 +26,27 @@
             margin-top: rem(35px);
         }
 
-        &--ifl {
-            .js & {
-                position: relative;
-                margin-top: rem(20px);
+        &:first-child {
+            margin-top: 0;
 
-                @include respond-above(md) {
-                    margin-top: rem(30px);
-                }
+            @at-root .js .form__group--ifl:first-child {
+                margin-top: rem(-5px);
+            }
+        }
 
-                &:first-child {
-                    margin-top: rem(-5px);
+        .js &--ifl {
+            position: relative;
+            margin-top: rem(20px);
+
+            @include respond-above(md) {
+                margin-top: rem(30px);
+            }
+        }
+
+        .wpcf7 & {
+            .no-js & {
+                br {
+                    display: none;
                 }
             }
         }
@@ -58,8 +67,20 @@
             }
         }
 
-        &:first-child {
-            margin-top: 0;
+        .form.invalid &.is-invalid {
+            &::before {
+                content: "";
+                position: absolute;
+                left: rem(-40px);
+                width: rem(20px);
+                height: rem(20px);
+                background: center/cover no-repeat url("../images/compiled/teenyicons-icon-info.svg");
+
+                @at-root .js .form.invalid .form__group--ifl.is-invalid::before {
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
         }
     }
 
@@ -74,10 +95,10 @@
             left: rem(2px);
             right: rem(2px);
             margin-bottom: 0;
-            padding: rem(12px) rem(10px) rem(4px);
+            padding: rem(13px) rem(12px) rem(5px);
             line-height: 1;
-            font-size: rem(12px);
-            font-weight: 400;
+            font-size: rem(13px);
+            font-weight: $font-weight-base;
             color: $blue;
             background-color: $off-white-dark;
             border-top-left-radius: rem(4px);
@@ -91,7 +112,9 @@
 
     &__input {
         width: 100%;
-        padding: rem(10px);
+        padding: rem(12px);
+        line-height: $line-height-base;
+        font-size: $font-size-base;
         background-color: $off-white-dark;
         border: rem(2px) solid $off-white-dark;
         border-radius: rem(4px);
@@ -118,15 +141,18 @@
             padding-bottom: rem(8px);
         }
 
+        .form.invalid .form__group.is-invalid & {
+            // border-color: $danger;
+            border-color: $warning;
         }
 
         &:focus {
             border-color: $blue;
             outline: none;
-        }
 
-        &:valid {
-            border-color: $green;
+            .form__group.is-valid & {
+                border-color: $success;
+            }
         }
 
         //
@@ -145,7 +171,7 @@
         // Autocomplete styling for WebKit-based browsers.
         &:-webkit-autofill,
         &:-internal-autofill-selected {
-            box-shadow: 0 0 0 1000px $off-white-dark inset;
+            box-shadow: 0 0 0 1000px $off-white-dark inset; // Equalling <input> height should suffice?
 
             @media (prefers-contrast: high) {
                 box-shadow: 0 0 0 1000px $white inset;

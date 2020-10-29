@@ -15,7 +15,13 @@
     }
 
     &:hover {
-        background-color: darken($blue, 5%);
+        &:not(:disabled) {
+            background-color: darken($blue, 5%);
+        }
+
+        .wpcf7 &:disabled {
+            cursor: default;
+        }
     }
 
     &:focus {

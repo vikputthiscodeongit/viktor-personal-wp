@@ -6,6 +6,22 @@
 
 
     //
+    // Update WordPress's is_email() to comply with the RFC 5322 specification.
+    function is_valid_email($is_email, $email, $context) {
+        $is_email = false;
+
+        // Use a RegEx instead of FILTER_VALIDATE_EMAIL because FILTER_VALIDATE_EMAIL validates email addresses against the superseded RFC 822 specification. See also https://stackoverflow.com/a/201378/6396604 & https://emailregex.com/.
+        // Don't put the RegEx in a variable to prevent my editor's syntax highlighting from going bananas.
+        if (preg_match('/^(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){255,})(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){65,}@)(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22))(?:\.(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22)))*@(?:(?:(?!.*[^.]{64,})(?:(?:(?:xn--)?[a-z0-9]+(?:-[a-z0-9]+)*\.){1,126}){1,}(?:(?:[a-z][a-z0-9]*)|(?:(?:xn--)[a-z0-9]+))(?:-[a-z0-9]+)*)|(?:\[(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-9][:\]]){7,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?)))|(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){5}:)|(?:(?!(?:.*[a-f0-9]:){5,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3}:)?)))?(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))(?:\.(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))){3}))\]))$/iD', $email)) {
+            $is_email = true;
+        }
+
+        return $is_email;
+    }
+    add_filter("is_email", "is_valid_email", 99, 3);
+
+
+    //
     // Updates
     add_filter("auto_update_theme", "__return_true");
 
@@ -141,13 +157,13 @@
 
     //
     // Deregister default scripts
-    function remove_scripts() {
-        if (!is_admin()) {
-            wp_dequeue_script("jquery");
-            wp_deregister_script("jquery");
-        }
-    }
-    add_action("wp_enqueue_scripts", "remove_scripts");
+    // function remove_scripts() {
+    //     if (!is_admin()) {
+    //         wp_dequeue_script("jquery");
+    //         wp_deregister_script("jquery");
+    //     }
+    // }
+    // add_action("wp_enqueue_scripts", "remove_scripts");
 
 
     //
@@ -183,3 +199,9 @@
         }
         add_filter("script_loader_tag", "add_async_defer_attribute", 10, 2);
     }
+
+
+    //
+    // Contact Form 7 - Globally disable CSS and JavaScript
+    add_filter("wpcf7_load_js", "__return_false");
+    add_filter("wpcf7_load_css", "__return_false");
