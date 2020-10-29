@@ -24,6 +24,25 @@ import stylesheet from "../scss/style.scss";
         }
     };
 
+    //
+    // Generic helper functions
+    // setTimeout, but better.
+    let timeoutHandles = [];
+
+    function setTimeoutWithId(id, fun, time) {
+        if (id in timeoutHandles) {
+            clearTimeout(timeoutHandles[id]);
+        }
+
+        timeoutHandles[id] = setTimeout(fun, time);
+    }
+
+    // Check if viewport is wider than given breakpoint.
+    // function aboveBreakpoint(breakpoint) {
+    //     const bp = breakpoint + "Breakpoint";
+    //
+    //     return window.matchMedia("(min-width: " + stylesheet[bp] + ")").matches;
+    // }
 
     // Check if prefers-reduced-motion is set.
     function motionAllowed() {
