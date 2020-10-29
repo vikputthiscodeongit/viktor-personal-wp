@@ -82,11 +82,11 @@
 @import "mixins/sizing";
 
 // Utilities
-@import "utils/animations";
 @import "utils/ratio";
 
 // Components
 @import "components/general";
+// @import "components/animations";
 @import "components/layout";
 @import "components/type";
 @import "components/button";
