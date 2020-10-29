@@ -40,7 +40,6 @@
   ?>
 
   <body <?php body_class(); ?>>
-    <div class="overlay overlay--load"></div>
 
     <header class="site-header" id="site-header">
         <div class="site-menu">
