@@ -8,13 +8,19 @@ img {
 }
 
 .media {
-    margin-bottom: rem(16px);
+    .title + & {
+        margin-top: rem(24px);
 
-    @include respond-above(xxs) {
-        margin-bottom: rem(20px);
+        @include respond-above(md) {
+            margin-top: rem(30px);
+        }
     }
 
-    @include respond-above(md) {
-        margin-bottom: rem(24px);
+    .text + & {
+        margin-top: rem(16px);
+
+        @include respond-above(md) {
+            margin-top: rem(20px);
+        }
     }
 }
