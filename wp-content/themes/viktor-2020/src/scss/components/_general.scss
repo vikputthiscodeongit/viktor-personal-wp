@@ -35,7 +35,7 @@ ol, ul {
 
 a {
     transition: $transition-base;
-    transition-property: text-decoration-color, color;
+    transition-property: text-decoration-color, color, outline;
 
     &:focus {
         outline: rem(2px) solid currentColor; // Not defining outline-color as currentColor results in :focus outline-color equalling <body> color in IE.
