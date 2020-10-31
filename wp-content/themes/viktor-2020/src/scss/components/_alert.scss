@@ -1,8 +1,10 @@
 .alert {
     position: absolute;
-    top: rem(16px);
+    top: rem(12px);
     left: 50%;
-    z-index: -100;
+    max-width: map-get($container-max-widths, xs);
+    width: calc(100% - (#{rem(12px)} * 2));
+    z-index: 100;
     padding: $alert-padding-y $alert-padding-x;
     visibility: hidden;
     opacity: 0;
@@ -12,7 +14,20 @@
     box-shadow: $alert-box-shadow;
     transform: translateX(-50%);
     transition: $alert-transition;
-    transition-property: z-index, visibility, opacity;
+    transition-property: visibility, opacity;
+
+    @include respond-above(sm) {
+        max-width: rem(480px);
+    }
+
+    @include respond-above(md) {
+        max-width: rem(512px);
+    }
+
+    @include respond-above(lg) {
+        max-width: none;
+        width: auto;
+    }
 
     &--form {
         &:not(.alert--mail_sent) {
@@ -26,7 +41,6 @@
     }
 
     &.is-visible {
-        z-index: 100;
         visibility: visible;
         opacity: 1;
     }
