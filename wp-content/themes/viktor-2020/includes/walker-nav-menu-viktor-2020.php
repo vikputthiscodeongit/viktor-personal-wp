@@ -210,12 +210,11 @@ class Viktor_2020 extends Walker_Nav_Menu {
 		}
 
 		$icon = get_field('page_icon', $item->object_id);
-		$img_src = $icon ? $icon['url'] : 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"%3E%3C/svg%3E';
 
-		$div_open = '<span class=\'site-navigation__icon\'>';
-		$img = '<img src="' . esc_attr($img_src) . '" alt="">';
+		$div_open  = '<span class=\'site-navigation__icon\'>';
+		$img 	   = $icon ? '<img src="' . esc_attr($icon['url']) . '" alt="">' : false;
 		$div_close = '</span>';
-		$icon_el = $div_open . $img . $div_close;
+		$icon_el   = $div_open . $img . $div_close;
 
 		/** This filter is documented in wp-includes/post-template.php */
 		$title = apply_filters( 'the_title', $item->title, $item->ID );
