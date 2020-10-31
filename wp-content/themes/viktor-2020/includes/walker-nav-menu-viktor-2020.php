@@ -210,12 +210,12 @@ class Viktor_2020 extends Walker_Nav_Menu {
 		}
 
 		$icon = get_field('page_icon', $item->object_id);
-		if ($icon) {
-			$div_open = '<span class=\'site-navigation__icon\'>';
-			$img = '<img src="' . esc_attr($icon['url']) . '" alt="">';
-			$div_close = '</span>';
-			$icon_elem = $div_open . $img . $div_close;
-		}
+		$img_src = $icon ? $icon['url'] : 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"%3E%3C/svg%3E';
+
+		$div_open = '<span class=\'site-navigation__icon\'>';
+		$img = '<img src="' . esc_attr($img_src) . '" alt="">';
+		$div_close = '</span>';
+		$icon_el = $div_open . $img . $div_close;
 
 		/** This filter is documented in wp-includes/post-template.php */
 		$title = apply_filters( 'the_title', $item->title, $item->ID );
@@ -234,7 +234,7 @@ class Viktor_2020 extends Walker_Nav_Menu {
 
 		$item_output  = $args->before;
 		$item_output .= '<a' . $attributes . '>';
-		$item_output .= $icon ? $icon_elem : false;
+		$item_output .= $icon_el;
 		$item_output .= '<span class="site-navigation__title">';
 		$item_output .= '<span>' . $args->link_before . $title . $args->link_after . '</span>';
 		$item_output .= '</span>';
