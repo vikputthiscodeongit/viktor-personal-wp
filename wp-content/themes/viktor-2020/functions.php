@@ -178,8 +178,8 @@
     //
     // Register custom styles & scripts
     function add_styles_scripts() {
-        $style_version = date("Ymd_His", filemtime(plugin_dir_path( __FILE__ ) . "/dist/css/style.css"));
-        $bundle_version  = date("Ymd_His", filemtime(plugin_dir_path( __FILE__ ) . "/dist/js/bundle-main.js"));
+        $style_version = date("Ymd_His", filemtime(plugin_dir_path(__FILE__) . "/dist/css/style.css"));
+        $bundle_version  = date("Ymd_His", filemtime(plugin_dir_path(__FILE__) . "/dist/js/bundle-main.js"));
 
         wp_enqueue_style("fonts", "https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Recursive:wght@400;600&display=swap", false, null);
         wp_enqueue_style("style", THEME_DIR . "/dist/css/style.css", false, $style_version);
