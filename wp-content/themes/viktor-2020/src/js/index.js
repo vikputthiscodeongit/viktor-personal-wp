@@ -134,6 +134,8 @@ import stylesheet from "../scss/style.scss";
     let wpcf7 = {
         init: function(wpcf7El) {
             // The form itself
+            wpcf7.captcha(wpcf7El);
+
             wpcf7.htmlCleaner(wpcf7El);
 
             wpcf7El.addEventListener("wpcf7invalid", function(e) {
@@ -183,6 +185,32 @@ import stylesheet from "../scss/style.scss";
             });
         },
 
+        captcha: function(wpcf7El) {
+            const wpcf7Form    = wpcf7El.querySelector(".wpcf7-form"),
+                  hiddenFields = wpcf7Form.querySelectorAll(".wpcf7-mc-h"),
+                  digitFields  = wpcf7Form.querySelectorAll("input[name^='wpcf7-mc-d'"),
+                  answer       = wpcf7Form.querySelector("label[for='wpcf7-mc-answer']"),
+                  star         = document.getElementById("wpcf7-mc-answer-star");
+
+            hiddenFields.forEach(function(field) {
+                field.style.display = "none";
+            });
+
+            digitFields.forEach(function(field, i) {
+                let digits = answer.textContent.match(/[0-9]/g);
+                const targetDigit = digits[i];
+
+                // 3 seconds timeout because spambots fill in forms real fast and have probably already left the page by the time the value gets inserted in the DOM.
+                setTimeout(function() {
+                    if (!field.value) {
+                        field.value = targetDigit;
+                    }
+                }, 3000);
+            });
+
+            star.style.cssText = "display: inline-block; vertical-align: top; margin-left: 0.25rem; line-height: 1;";
+        },
+
         htmlCleaner: function(wpcf7El) {
             const wpcf7Form = wpcf7El.querySelector(".wpcf7-form"),
                   groups    = wpcf7Form.querySelectorAll(".form__group");
@@ -229,6 +257,8 @@ import stylesheet from "../scss/style.scss";
             } else {
                 wpcf7.invalidState.set(field);
             }
+
+            // Validatie voor CAPTCHA.
         },
 
         invalidState: {
@@ -251,11 +281,13 @@ import stylesheet from "../scss/style.scss";
             const invalidFields     = e.detail.apiResponse.invalid_fields,
                   firstInvalidField = document.getElementById(invalidFields[0].idref);
 
-            firstInvalidField.scrollIntoView({
-                behavior: motionAllowed() ? "smooth" : "auto",
-                block: "start",
-                inline: "start"
-            });
+            if (firstInvalidField) {
+                firstInvalidField.scrollIntoView({
+                    behavior: motionAllowed() ? "smooth" : "auto",
+                    block: "start",
+                    inline: "start"
+                });
+            }
         }
     };
 }());

@@ -205,3 +205,109 @@
     // Contact Form 7 - Globally disable CSS and JavaScript
     add_filter("wpcf7_load_js", "__return_false");
     add_filter("wpcf7_load_css", "__return_false");
+
+
+    //
+    // Contact Form 7 - Mathematical CAPTCHA
+    /**
+     * Start the starter
+     */
+    add_action("wpcf7_init", "cf7mc_add_shortcode");
+    function cf7mc_add_shortcode() {
+        wpcf7_add_form_tag("cf7mc", "cf7mc_init", true);
+    }
+
+    /**
+     * Initializer
+     */
+    function cf7mc_init($tag) {
+        $tag = new WPCF7_FormTag($tag);
+
+        $digit1 = mt_rand(1, 10);
+        $digit2 = mt_rand(1, 10);
+
+        $sum = $digit1 + $digit2;
+
+        $output = '
+        <input type="text" name="wpcf7-mc-d1" class="wpcf7-mc-h">
+
+        <input type="text" name="wpcf7-mc-d2" class="wpcf7-mc-h">
+
+        <label for="wpcf7-mc-answer" class="form__label form__label--inline">' . $digit1 . ' + ' . $digit2 . ' =</label>
+        <input type="text" name="wpcf7-mc-answer" id="wpcf7-mc-answer" class="form__input form__input--numeric form__input--inline" inputmode="numeric" pattern="[0-9]*" aria-required="true">
+        <span id="wpcf7-mc-answer-star">*</span>
+
+        <input type="text" name="city" class="wpcf7-mc-h">
+        ';
+
+        return $output;
+    }
+
+    // TODO
+    // Voeg .wpcf7-js-required toe aan wpcf7El (zodat je in CSS makkelijk een "Dit formulier heeft JavaScript nodig."-melding kan maken).
+
+    /**
+     * Validator
+     */
+    function cf7mc_validator($result, $tag) {
+        // Search the tags to see if cf7mc is being used before initializing validation.
+        $key = array_search("cf7mc", array_column($tag, "type"));
+
+        if(!empty($key)) {
+            $tag = new WPCF7_FormTag($tag);
+            $tag->name = "captcha";
+
+            $digit1 = $_POST["wpcf7-mc-d1"];
+            $digit2 = $_POST["wpcf7-mc-d2"];
+            $answer = $_POST["wpcf7-mc-answer"];
+            $honeypot = $_POST["city"];
+
+            if (!empty($honeypot)) {
+                $tag->name = "captcha_hp";
+
+                $result->invalidate($tag, wpcf7_get_message("spam"));
+            } elseif (empty($answer)) {
+                $tag->name = "captcha_resp";
+
+                $result->invalidate($tag, __("You didn't do any maths.", "contact-form-7-maths-captcha"));
+            } elseif ($digit1 + $digit2 != $answer) {
+                // If this condition evaluates to true, the most obvious reason would be because a wrong answer is given.
+                // It however will also be true if either the form gets sent within the first 3 seconds after page load,
+                // or if a spam bot (/ human who is actively trying to break my site) fills in a value in the digit 1 and/or digit 2 field
+                // and proceeds to submit the form. In these cases the validation message as it is would be wrong.
+                $tag->name = "captcha_resp";
+
+                $result->invalidate($tag, __("There was an error in your maths.", "contact-form-7-maths-captcha"));
+            }
+        }
+
+        return $result;
+    }
+    add_filter("wpcf7_validate", "cf7mc_validator", 99, 2);
+
+    /**
+     * Tag generator
+     */
+    add_action("wpcf7_admin_init", "cf7mc_add_tag_generator", 55);
+    function cf7mc_add_tag_generator() {
+        $tag_generator = WPCF7_TagGenerator::get_instance();
+
+        // TODO: Check arguments
+        $tag_generator->add("cf7mc", __("maths challenge", "contact-form-7-maths-captcha"), "cf7mc_tag_generator", array("nameless" => 1));
+    }
+
+    function cf7mc_tag_generator($contact_form, $args = '') {
+        $args = wp_parse_args($args, array()); ?>
+        <div class="control-box">
+            <p>
+                A lightweight mathematics based CAPTCHA that's not too difficult to solve.
+            </p>
+        </div>
+        <div class="insert-box">
+            <input type="text" name="cf7mc" class="tag code" readonly="readonly" onfocus="this.select()" />
+            <div class="submitbox">
+                <input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr(__('Insert tag', 'contact-form-7-maths-captcha')); ?>" />
+            </div>
+        </div>
+    <?php
+    }

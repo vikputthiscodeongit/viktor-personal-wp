@@ -89,6 +89,11 @@
         font-family: $headings-font-family;
         font-weight: $headings-font-weight;
 
+        &--inline {
+            display: inline-block;
+            margin-bottom: 0;
+        }
+
         .js .form__group--ifl & {
             position: absolute;
             top: rem(2px);
@@ -123,6 +128,15 @@
         @media (prefers-contrast: high) {
             background-color: $white;
             border-color: $black;
+        }
+
+        &--inline {
+            display: inline-block;
+            width: rem(64px);
+
+            .form__label--inline + & {
+                margin-left: rem(8px);
+            }
         }
 
         &--email,
