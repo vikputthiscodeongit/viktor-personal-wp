@@ -44,15 +44,24 @@
 
     //
     //
-    function clean_wp_head() {
+    function generate_meta_description() {
+        echo '<meta name="description" content="' . esc_attr(get_bloginfo("description")) . '" />' . "\n";
+    }
+
+
+    //
+    //
+    function edit_wp_head() {
         remove_action("wp_head", "wp_generator");
         remove_action("wp_head", "rsd_link");
         remove_action("wp_head", "wlwmanifest_link");
 
         global $sitepress;
         remove_action("wp_head", array($sitepress, "meta_generator_tag", 20));
+
+        add_action("wp_head", "generate_meta_description", 1);
     }
-    add_action("after_setup_theme", "clean_wp_head");;
+    add_action("after_setup_theme", "edit_wp_head");
 
 
     //
