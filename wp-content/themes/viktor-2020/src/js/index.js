@@ -27,15 +27,15 @@ import stylesheet from "../scss/style.scss";
     //
     // Generic helper functions
     // setTimeout, but better.
-    let timeoutHandles = [];
-
-    function setTimeoutWithId(id, fun, time) {
-        if (id in timeoutHandles) {
-            clearTimeout(timeoutHandles[id]);
-        }
-
-        timeoutHandles[id] = setTimeout(fun, time);
-    }
+    // let timeoutHandles = [];
+    //
+    // function setTimeoutWithId(id, fun, time) {
+    //     if (id in timeoutHandles) {
+    //         clearTimeout(timeoutHandles[id]);
+    //     }
+    //
+    //     timeoutHandles[id] = setTimeout(fun, time);
+    // }
 
     // Check if viewport is wider than given breakpoint.
     // function aboveBreakpoint(breakpoint) {
@@ -77,6 +77,8 @@ import stylesheet from "../scss/style.scss";
     });
 
     document.addEventListener("DOMContentLoaded", function() {
+        simpleAlert.init(".simple-alert", "simple-alert--form");
+
         const wpcf7Els = document.querySelectorAll(".wpcf7");
 
         if (wpcf7Els.length > 0) {
@@ -87,45 +89,90 @@ import stylesheet from "../scss/style.scss";
     });
 
     //
-    // Alert
-    let alert = {
-        el: document.querySelector(".alert"),
+    // Simple Alert
+    let simpleAlert = {
+        el: {
+            target: false,
+            classes: {}
+        },
+
+        init: function(targetEl, defaultClasses) {
+            this.el.target = document.querySelector(targetEl);
+            this.el.classes.default = defaultClasses;
+
+            this.el.target.className += " " + defaultClasses;
+
+            const p = document.createElement("p");
+            p.classList.add("simple-alert__p");
+
+            this.el.target.insertBefore(p, this.el.target.firstChild);
+        },
+
+        destroy: function(el) {
+            if (this.isShown()) {
+                this.hide();
+            }
+
+            // Return the alert to its pre-initialized state.
+            this.el.target
+                .removeChild(this.el.target.querySelector(".simple-alert__p"));
+
+            this.el.target.className = this.el.target.className
+                                        .replace(" " + this.el.classes.default, "");
+        },
+
+        isShown: function() {
+            return this.el.target.classList.contains("is-visible");
+        },
 
         hide: function() {
-            this.el.classList.remove("is-visible");
+            this.el.target.classList.remove("is-visible");
 
             setTimeout(function() {
-                alert.el.className = alert.el.className.replace(/(\s(alert--){1}\w*)/g, "");
-                alert.el.removeAttribute("role");
+                simpleAlert.el.target.removeAttribute("role");
 
-                alert.el.firstElementChild.textContent = "";
+                if (simpleAlert.el.classes.extra !== "undefined") {
+                    simpleAlert.el.target.className = simpleAlert.el.target.className
+                                                        .replace(" " + simpleAlert.el.classes.extra, "");
+                }
+
+                simpleAlert.el.target.querySelector(".simple-alert__p").textContent = "";
             }, 167); // Get timeout from CSS.
         },
 
-        show: function(type, data) {
-            let cssModifiers,
-                text;
-
-            switch (type) {
-                case "form":
-                    cssModifiers = "alert--" + type + " " + "alert--" + data.detail.status;
-
-                    if (typeof data !== "undefined") {
-                        text = data.detail.apiResponse.message;
-                    } else {
-                        text = "No data was passed to this alert, so here's some dummy text for you.";
-                    }
-
-                    break;
-                default:
-                    cssModifiers = "alert--default";
-                    text = data;
+        show: function(text, extraClasses, timeoutDur) {
+            if (typeof text === "undefined") {
+                text = "No data was passed to this alert, so here's some dummy text for you.";
             }
 
-            this.el.firstElementChild.textContent = text;
+            if (typeof extraClasses !== "undefined") {
+                this.el.classes.extra = extraClasses;
 
-            this.el.setAttribute("role", "alert");
-            this.el.className += " " + cssModifiers + " " + "is-visible";
+                this.el.target.className += " " + extraClasses;
+            }
+
+            this.el.target.querySelector(".simple-alert__p").textContent = text;
+
+            const clearTheTimeout = this.isShown();
+
+            this.el.target.className += " " + "is-visible";
+            this.el.target.setAttribute("role", "alert");
+
+            if (typeof timeoutDur !== "undefined") {
+                console.log("timeoutDur is set.");
+
+                let timeout;
+
+                if (clearTheTimeout) {
+                    clearTimeout(timeout);
+
+                    console.log("Timeout has been cleared.");
+                }
+
+                timeout = setTimeout(function() {
+                    simpleAlert.hide();
+                }, timeoutDur);
+            }
         }
     };
 
@@ -146,15 +193,16 @@ import stylesheet from "../scss/style.scss";
                   submitButton = wpcf7Form.querySelector('[type="submit"]');
 
             wpcf7El.addEventListener("wpcf7submit", function(e) {
-                // console.log(e);
+                console.log(e);
 
-                alert.show("form", e);
+                // const alertTimeoutDur = !debugMode.set ? 4000 : 600000;
+                const alertTimeoutDur = 10000;
 
-                let timeout = !debugMode.set ? 4000 : 600000;
-
-                setTimeoutWithId("alert--form", function() {
-                    alert.hide();
-                }, timeout);
+                simpleAlert.show(
+                    e.detail.apiResponse.message,
+                    "simple-alert--" + e.detail.status,
+                    alertTimeoutDur
+                );
 
                 submitButton.removeAttribute("disabled");
             });
@@ -177,7 +225,7 @@ import stylesheet from "../scss/style.scss";
 
                 field.addEventListener("input", function() {
                     if (!wpcf7Form.classList.contains("init")) {
-                        alert.hide();
+                        simpleAlert.hide();
                     }
 
                     wpcf7.fieldValidator(field);
