@@ -337,6 +337,20 @@ import stylesheet from "../scss/style.scss";
                         field.removeAttribute("size") :
                         field.removeAttribute("cols");
                 }
+
+                const ajaxLoader = group.querySelector(".ajax-loader");
+
+                if (ajaxLoader) {
+                    let loader = document.createElement("span");
+                    loader.classList.add("loader");
+
+                    ajaxLoader.appendChild(loader)
+
+                    ajaxLoader.classList.remove("ajax-loader");
+                    ajaxLoader.classList.add("form__ajax-loader");
+                }
+
+
             });
 
             const responses = [

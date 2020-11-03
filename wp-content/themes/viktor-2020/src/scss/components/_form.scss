@@ -26,6 +26,11 @@
             margin-top: rem(35px);
         }
 
+        &--inline {
+            display: flex;
+            align-items: center;
+        }
+
         &:first-child {
             margin-top: 0;
 
@@ -208,6 +213,14 @@
 
         &::placeholder {
             color: $gray;
+        }
+    }
+
+    &__ajax-loader {
+        font-size: rem(24px);
+
+        .form__group--inline & {
+            flex-shrink: 0;
         }
     }
 }
