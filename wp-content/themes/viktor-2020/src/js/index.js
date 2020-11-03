@@ -135,7 +135,13 @@ import stylesheet from "../scss/style.scss";
     let simpleAlert = {
         el: {
             target: false,
-            classes: {}
+            classes: {},
+            transDur: function() {
+                const styles = window.getComputedStyle(simpleAlert.el.target);
+                const transDurCss = styles.getPropertyValue("transition-duration");
+
+                return cssSecondDurationToMs(transDurCss);
+            }
         },
 
         init: function(targetEl, defaultClasses) {
@@ -169,6 +175,7 @@ import stylesheet from "../scss/style.scss";
 
         hide: function() {
             this.el.target.classList.remove("is-visible");
+            console.log("Removed 'is-visible'");
 
             setTimeout(function() {
                 simpleAlert.el.target.removeAttribute("role");
@@ -179,7 +186,9 @@ import stylesheet from "../scss/style.scss";
                 }
 
                 simpleAlert.el.target.querySelector(".simple-alert__p").textContent = "";
-            }, 167); // Get timeout from CSS.
+
+                console.log("Restored state");
+            }, this.el.transDur());
         },
 
         show: function(text, extraClasses, timeoutDur) {
@@ -233,6 +242,10 @@ import stylesheet from "../scss/style.scss";
 
             const wpcf7Form    = wpcf7El.querySelector(".wpcf7-form"),
                   submitButton = wpcf7Form.querySelector('[type="submit"]');
+
+            wpcf7El.addEventListener("wpcf7beforesubmit", function(e) {
+                console.log(e);
+            });
 
             wpcf7El.addEventListener("wpcf7submit", function(e) {
                 console.log(e);
