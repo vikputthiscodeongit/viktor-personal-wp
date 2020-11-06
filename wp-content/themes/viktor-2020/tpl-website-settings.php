@@ -5,8 +5,8 @@
 ?>
 
 <?php
-    $site_settings_strings = $strings["site_settings"];
-    // var_dump($site_settings_strings);
+    $site_settings = get_field("website_settings");
+    // var_dump($site_settings);
 ?>
 <section class="site-section">
     <div class="container">
@@ -23,47 +23,34 @@
             }
         ?>
 
-        <ul class="site-settings" aria-label="<?php echo $site_settings_strings["self"]; ?>">
+        <ul class="site-settings" aria-label="<?php echo $site_settings["label"]; ?>">
             <li class="site-settings__item">
-                <label for="setting-theme"><?php echo $site_settings_strings["theme"]["self"];?></label>
-                <button type="button" class="toggle" id="setting-theme" data-string-light="<?php echo $site_settings_strings["theme"]["light"]; ?>" data-string-dark="<?php echo $site_settings_strings["theme"]["dark"]; ?>">
+                <label for="setting-dark-theme"><?php echo $site_settings["dark_theme"];?></label>
+                <input type="checkbox" class="toggle" id="setting-dark-theme">
                 </button>
             </li>
 
             <li class="site-settings__item">
-                <button type="button" class="toggle" id="setting-reduced-motion">
-                    <?php echo $site_settings_strings["reduced_motion"]; ?>
+                <label for="setting-reduced-motion"><?php echo $site_settings["reduced_motion"];?></label>
+                <input type="checkbox" class="toggle" id="setting-reduced-motion">
                 </button>
             </li>
 
             <li class="site-settings__item">
-                <button type="button" class="toggle" id="setting-increased-contrast">
-                    <?php echo $site_settings_strings["increased_contrast"]; ?>
+                <label for="setting-increased-contrast"><?php echo $site_settings["increased_contrast"];?></label>
+                <input type="checkbox" class="toggle" id="setting-increased-contrast">
                 </button>
             </li>
 
             <li class="site-settings__item">
-                <button type="button" class="toggle" id="setting-site-header-auto-hide">
-                    <?php echo $site_settings_strings["site_header_auto_hide"]; ?>
+                <label for="setting-site-header-auto-hide"><?php echo $site_settings["site_header_auto_hide"];?></label>
+                <input type="checkbox" class="toggle" id="setting-site-header-auto-hide">
                 </button>
             </li>
 
             <li class="site-settings__item">
-                <span><?php echo $site_settings_strings["language_select"]; ?></span>
-
-                <ul class="lang-select">
-                    <li class="lang-select__item">
-                        <span>
-                            Nederlands
-                        </span>
-                    </li>
-
-                    <li class="lang-select__item">
-                        <a href="#" target="_self">
-                            English
-                        </a>
-                    </li>
-                </ul>
+                <label for="setting-dark-theme"><?php echo $site_settings["lang_select"];?></label>
+                <span>LANGUAGE SWITCHER</span>
             </li>
         </ul>
 
