@@ -1,49 +1,8 @@
 import stylesheet from "../scss/style.scss";
 
 (function() {
-    //
-    // For debugging purposes.
-    let debugMode = {
-        set: process.env.NODE_ENV === "production" ? false : true,
-
-        createEl: function() {
-            const debugElWrapper = document.createElement("div");
-            debugElWrapper.classList.add("container");
-
-            const debugEl = document.createElement("div");
-            debugEl.classList.add("debug-el");
-
-            const debugElInner = document.createElement("p");
-            debugElInner.textContent = "! Debugging mode is enabled !";
-
-            debugElWrapper.appendChild(debugEl);
-            debugEl.appendChild(debugElInner);
-
-            const main = document.querySelector("main");
-            main.insertBefore(debugElWrapper, main.firstElementChild);
-        }
-    };
-
-    //
     // Generic helper functions
-    // setTimeout, but better.
-    // let timeoutHandles = [];
     //
-    // function setTimeoutWithId(id, fun, time) {
-    //     if (id in timeoutHandles) {
-    //         clearTimeout(timeoutHandles[id]);
-    //     }
-    //
-    //     timeoutHandles[id] = setTimeout(fun, time);
-    // }
-
-    // Check if viewport is wider than given breakpoint.
-    // function aboveBreakpoint(breakpoint) {
-    //     const bp = breakpoint + "Breakpoint";
-    //
-    //     return window.matchMedia("(min-width: " + stylesheet[bp] + ")").matches;
-    // }
-
     function cssSecondDurationToMs(time) {
         if (!/^((0\.){1}|([1-9]+\.*))+([0-9])*s$/.test(time)) {
             console.error("Given time '" + time + "' is in an invalid format.");
@@ -86,6 +45,13 @@ import stylesheet from "../scss/style.scss";
     	return parseInt(time);
     }
 
+    // Check if viewport is wider than given breakpoint.
+    // function aboveBreakpoint(breakpoint) {
+    //     const bp = breakpoint + "Breakpoint";
+    //
+    //     return window.matchMedia("(min-width: " + stylesheet[bp] + ")").matches;
+    // }
+
     // Check if prefers-reduced-motion is set.
     function motionAllowed() {
         return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -97,6 +63,29 @@ import stylesheet from "../scss/style.scss";
 
         return regEx.test(address);
     }
+
+    //
+    // For debugging purposes.
+    let debugMode = {
+        set: process.env.NODE_ENV === "production" ? false : true,
+
+        createEl: function() {
+            const debugElWrapper = document.createElement("div");
+            debugElWrapper.classList.add("container");
+
+            const debugEl = document.createElement("div");
+            debugEl.classList.add("debug-el");
+
+            const debugElInner = document.createElement("p");
+            debugElInner.textContent = "! Debugging mode is enabled !";
+
+            debugElWrapper.appendChild(debugEl);
+            debugEl.appendChild(debugElInner);
+
+            const main = document.querySelector("main");
+            main.insertBefore(debugElWrapper, main.firstElementChild);
+        }
+    };
 
     //
     // <html> / <body> operations
@@ -243,12 +232,8 @@ import stylesheet from "../scss/style.scss";
             const wpcf7Form    = wpcf7El.querySelector(".wpcf7-form"),
                   submitButton = wpcf7Form.querySelector('[type="submit"]');
 
-            wpcf7El.addEventListener("wpcf7beforesubmit", function(e) {
-                console.log(e);
-            });
-
             wpcf7El.addEventListener("wpcf7submit", function(e) {
-                console.log(e);
+                // console.log(e);
 
                 // const alertTimeoutDur = !debugMode.set ? 4000 : 600000;
                 const alertTimeoutDur = 10000;
@@ -374,8 +359,6 @@ import stylesheet from "../scss/style.scss";
             } else {
                 wpcf7.invalidState.set(field);
             }
-
-            // Validatie voor CAPTCHA.
         },
 
         invalidState: {
