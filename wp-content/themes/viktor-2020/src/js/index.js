@@ -1,3 +1,5 @@
+import Noty from "noty";
+
 import stylesheet from "../scss/style.scss";
 
 (function() {
@@ -108,8 +110,6 @@ import stylesheet from "../scss/style.scss";
     });
 
     document.addEventListener("DOMContentLoaded", function() {
-        simpleAlert.init(".simple-alert", "simple-alert--form");
-
         const wpcf7Els = document.querySelectorAll(".wpcf7");
 
         if (wpcf7Els.length > 0) {
@@ -118,103 +118,6 @@ import stylesheet from "../scss/style.scss";
             });
         }
     });
-
-    //
-    // Simple Alert
-    let simpleAlert = {
-        el: {
-            target: false,
-            classes: {},
-            transDur: function() {
-                const styles = window.getComputedStyle(simpleAlert.el.target);
-                const transDurCss = styles.getPropertyValue("transition-duration");
-
-                return cssSecondDurationToMs(transDurCss);
-            }
-        },
-
-        init: function(targetEl, defaultClasses) {
-            this.el.target = document.querySelector(targetEl);
-            this.el.classes.default = defaultClasses;
-
-            this.el.target.className += " " + defaultClasses;
-
-            const p = document.createElement("p");
-            p.classList.add("simple-alert__p");
-
-            this.el.target.insertBefore(p, this.el.target.firstChild);
-        },
-
-        destroy: function(el) {
-            if (this.isShown()) {
-                this.hide();
-            }
-
-            // Return the alert to its pre-initialized state.
-            this.el.target
-                .removeChild(this.el.target.querySelector(".simple-alert__p"));
-
-            this.el.target.className = this.el.target.className
-                                        .replace(" " + this.el.classes.default, "");
-        },
-
-        isShown: function() {
-            return this.el.target.classList.contains("is-visible");
-        },
-
-        hide: function() {
-            this.el.target.classList.remove("is-visible");
-            console.log("Removed 'is-visible'");
-
-            setTimeout(function() {
-                simpleAlert.el.target.removeAttribute("role");
-
-                if (simpleAlert.el.classes.extra !== "undefined") {
-                    simpleAlert.el.target.className = simpleAlert.el.target.className
-                                                        .replace(" " + simpleAlert.el.classes.extra, "");
-                }
-
-                simpleAlert.el.target.querySelector(".simple-alert__p").textContent = "";
-
-                console.log("Restored state");
-            }, this.el.transDur());
-        },
-
-        show: function(text, extraClasses, timeoutDur) {
-            if (typeof text === "undefined") {
-                text = "No data was passed to this alert, so here's some dummy text for you.";
-            }
-
-            if (typeof extraClasses !== "undefined") {
-                this.el.classes.extra = extraClasses;
-
-                this.el.target.className += " " + extraClasses;
-            }
-
-            this.el.target.querySelector(".simple-alert__p").textContent = text;
-
-            const clearTheTimeout = this.isShown();
-
-            this.el.target.className += " " + "is-visible";
-            this.el.target.setAttribute("role", "alert");
-
-            if (typeof timeoutDur !== "undefined") {
-                console.log("timeoutDur is set.");
-
-                let timeout;
-
-                if (clearTheTimeout) {
-                    clearTimeout(timeout);
-
-                    console.log("Timeout has been cleared.");
-                }
-
-                timeout = setTimeout(function() {
-                    simpleAlert.hide();
-                }, timeoutDur);
-            }
-        }
-    };
 
     //
     // Contact Form 7
@@ -235,14 +138,21 @@ import stylesheet from "../scss/style.scss";
             wpcf7El.addEventListener("wpcf7submit", function(e) {
                 // console.log(e);
 
-                // const alertTimeoutDur = !debugMode.set ? 4000 : 600000;
-                const alertTimeoutDur = 10000;
+                const formStatus = e.detail.status;
 
-                simpleAlert.show(
-                    e.detail.apiResponse.message,
-                    "simple-alert--" + e.detail.status,
-                    alertTimeoutDur
-                );
+                const alertType       = formStatus !== "mail_sent" ?
+                                            "warning" : "success",
+                      alertText       = e.detail.apiResponse.message,
+                      alertTimeoutDur = !debugMode.set ? 4000 : false;
+
+                new Noty({
+                    type:    alertType,
+                    layout:  "topCenter",
+                    theme:   "bootstrap-v4",
+                    text:    alertText,
+                    timeout: alertTimeoutDur,
+                    killer:  true
+                }).show();
 
                 submitButton.removeAttribute("disabled");
             });
@@ -264,9 +174,7 @@ import stylesheet from "../scss/style.scss";
                 }
 
                 field.addEventListener("input", function() {
-                    if (!wpcf7Form.classList.contains("init")) {
-                        simpleAlert.hide();
-                    }
+                    Noty.closeAll();
 
                     wpcf7.fieldValidator(field);
                 });
@@ -334,8 +242,6 @@ import stylesheet from "../scss/style.scss";
                     ajaxLoader.classList.remove("ajax-loader");
                     ajaxLoader.classList.add("form__ajax-loader");
                 }
-
-
             });
 
             const responses = [

@@ -72,7 +72,8 @@
 
 
 // Other modules
-// They go here.
+@import "~noty/src/noty";
+@import "components/noty";
 
 
 // Project
@@ -93,6 +94,5 @@
 @import "components/media";
 @import "components/button";
 @import "components/form";
-@import "components/alert";
 @import "components/menu";
 @import "components/settings";
