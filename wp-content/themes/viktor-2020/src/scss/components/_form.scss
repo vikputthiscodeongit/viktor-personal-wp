@@ -26,10 +26,10 @@
             margin-top: rem(35px);
         }
 
-        &--inline {
-            display: flex;
-            align-items: center;
-        }
+        // &--inline {
+        //     display: flex;
+        //     align-items: center;
+        // }
 
         &:first-child {
             margin-top: 0;
@@ -40,7 +40,7 @@
         }
 
         .js &--ifl {
-            position: relative;
+            // position: relative;
             margin-top: rem(20px);
 
             @include respond-above(md) {
@@ -89,76 +89,76 @@
         }
     }
 
-    &__label {
-        display: block;
-        font-family: $headings-font-family;
-        font-weight: $headings-font-weight;
-
-        &--inline {
-            display: inline-block;
-            margin-bottom: 0;
-        }
-
-        .js .form__group--ifl & {
-            position: absolute;
-            top: rem(2px);
-            left: rem(2px);
-            right: rem(2px);
-            margin-bottom: 0;
-            padding: rem(13px) rem(12px) rem(5px);
-            line-height: 1;
-            font-size: rem(13px);
-            font-weight: $font-weight-base;
-            color: $blue;
-            background-color: $off-white-dark;
-            border-top-left-radius: rem(4px);
-            border-top-right-radius: rem(4px);
-
-            @media (prefers-contrast: high) {
-                background-color: $white;
-            }
-        }
-    }
+    // &__label {
+    //     display: block;
+    //     font-family: $headings-font-family;
+    //     font-weight: $headings-font-weight;
+    //
+    //     &--inline {
+    //         display: inline-block;
+    //         margin-bottom: 0;
+    //     }
+    //
+    //     .js .form__group--ifl & {
+    //         position: absolute;
+    //         top: rem(2px);
+    //         left: rem(2px);
+    //         right: rem(2px);
+    //         margin-bottom: 0;
+    //         padding: rem(13px) rem(12px) rem(5px);
+    //         line-height: 1;
+    //         font-size: rem(13px);
+    //         font-weight: $font-weight-base;
+    //         color: $blue;
+    //         background-color: $off-white-dark;
+    //         border-top-left-radius: rem(4px);
+    //         border-top-right-radius: rem(4px);
+    //
+    //         @media (prefers-contrast: high) {
+    //             background-color: $white;
+    //         }
+    //     }
+    // }
 
     &__input {
-        width: 100%;
-        padding: rem(12px);
-        line-height: $line-height-base;
-        font-size: $font-size-base;
-        background-color: $off-white-dark;
-        border: rem(2px) solid $off-white-dark;
-        border-radius: rem(4px);
-        transition: border-color $transition-base;
-
-        @media (prefers-contrast: high) {
-            background-color: $white;
-            border-color: $black;
-        }
-
-        &--inline {
-            display: inline-block;
-            width: rem(64px);
-
-            .form__label--inline + & {
-                margin-left: rem(8px);
-            }
-        }
-
-        &--email,
-        &--text {
-            .js .form__group--ifl & {
-                height: rem(69px); // Setting a fixed height is sadly the only way to guarantee consistent appearance across browsers.
-            }
-        }
-
-        &--textarea {
-            display: block;
-        }
-
-        .js .form__group--ifl & {
-            padding-top: rem(31px);
-            padding-bottom: rem(8px);
-        }
+        // width: 100%;
+        // padding: rem(12px);
+        // line-height: $line-height-base;
+        // font-size: $font-size-base;
+        // background-color: $off-white-dark;
+        // border: rem(2px) solid $off-white-dark;
+        // border-radius: rem(4px);
+        // transition: border-color $transition-base;
+        //
+        // @media (prefers-contrast: high) {
+        //     background-color: $white;
+        //     border-color: $black;
+        // }
+        //
+        // &--inline {
+        //     display: inline-block;
+        //     width: rem(64px);
+        //
+        //     .form__label--inline + & {
+        //         margin-left: rem(8px);
+        //     }
+        // }
+        //
+        // &--email,
+        // &--text {
+        //     .js .form__group--ifl & {
+        //         height: rem(69px); // Setting a fixed height is sadly the only way to guarantee consistent appearance across browsers.
+        //     }
+        // }
+        //
+        // &--textarea {
+        //     display: block;
+        // }
+        //
+        // .js .form__group--ifl & {
+        //     padding-top: rem(31px);
+        //     padding-bottom: rem(8px);
+        // }
 
         .form.invalid .form__group.is-invalid & {
             // border-color: $danger;
@@ -166,60 +166,61 @@
         }
 
         &:focus {
-            border-color: $blue;
-            outline: none;
+            // border-color: $blue;
+            // outline: none;
 
             .form__group.is-valid & {
                 border-color: $success;
             }
         }
 
+        // //
+        // // Reset default :invalid styles.
+        // // General (IE, maybe more)
+        // &:invalid {
+        //     outline: none;
+        // }
         //
-        // Reset default :invalid styles.
-        // General (IE, maybe more)
-        &:invalid {
-            outline: none;
-        }
-
-        // Gecko
-        &:-moz-ui-invalid {
-            box-shadow: none;
-        }
-
+        // // Gecko
+        // &:-moz-ui-invalid {
+        //     box-shadow: none;
+        // }
         //
-        // Autocomplete styling for WebKit-based browsers.
-        &:-webkit-autofill,
-        &:-internal-autofill-selected {
-            box-shadow: 0 0 0 1000px $off-white-dark inset; // Equalling <input> height should suffice?
-
-            @media (prefers-contrast: high) {
-                box-shadow: 0 0 0 1000px $white inset;
-            }
-        }
-
+        // //
+        // // Autocomplete styling for WebKit-based browsers.
+        // &:-webkit-autofill,
+        // &:-internal-autofill-selected {
+        //     box-shadow: 0 0 0 1000px $off-white-dark inset; // Equalling <input> height should suffice?
         //
-        // Input placeholder styling
-        &::-webkit-input-placeholder {
-            color: $gray;
-        }
-
-        &::-moz-placeholder {
-            color: $gray;
-        }
-
-        &:-ms-input-placeholder {
-            color: $gray;
-        }
-
-        &::placeholder {
-            color: $gray;
-        }
+        //     @media (prefers-contrast: high) {
+        //         box-shadow: 0 0 0 1000px $white inset;
+        //     }
+        // }
+        //
+        // //
+        // // Input placeholder styling
+        // &::-webkit-input-placeholder {
+        //     color: $gray;
+        // }
+        //
+        // &::-moz-placeholder {
+        //     color: $gray;
+        // }
+        //
+        // &:-ms-input-placeholder {
+        //     color: $gray;
+        // }
+        //
+        // &::placeholder {
+        //     color: $gray;
+        // }
     }
 
     &__ajax-loader {
         font-size: rem(24px);
 
-        .form__group--inline & {
+        // .form__group--inline & {
+        .form__group.field--inline & {
             flex-shrink: 0;
         }
     }
