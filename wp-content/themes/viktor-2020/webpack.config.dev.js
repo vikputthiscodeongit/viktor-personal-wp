@@ -21,6 +21,10 @@ module.exports = {
 
     devtool: "inline-source-map",
 
+    externals: {
+        jquery: "jQuery"
+    },
+
     plugins: [
         new MiniCssExtractPlugin({
             filename: "./css/style.css"

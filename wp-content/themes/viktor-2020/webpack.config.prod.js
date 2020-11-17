@@ -23,6 +23,10 @@ module.exports = {
 
     devtool: "source-map",
 
+    externals: {
+        jquery: "jQuery"
+    },
+
     plugins: [
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
