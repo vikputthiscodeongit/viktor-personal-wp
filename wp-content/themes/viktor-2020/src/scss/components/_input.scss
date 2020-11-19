@@ -1,70 +1,62 @@
-label {
-    $c: &;
+.field {
+    &--ifl {
+        position: relative;
+    }
 
+    &--inline {
+        display: flex;
+        align-items: center;
+    }
+}
+
+label {
     display: block;
     font-family: $headings-font-family;
     font-weight: $headings-font-weight;
 
-    @at-root .field {
-        &--ifl #{$c} {
-            .js & {
-                position: absolute;
-                top: rem(2px);
-                left: rem(2px);
-                right: rem(2px);
-                margin-bottom: 0;
-                padding: rem(13px) rem(12px) rem(5px);
-                line-height: 1;
-                font-size: rem(13px);
-                font-weight: $font-weight-base;
-                color: $blue;
-                background-color: $off-white-dark;
-                border-top-left-radius: rem(4px);
-                border-top-right-radius: rem(4px);
+    .field--ifl & {
+        .js & {
+            position: absolute;
+            top: rem(2px);
+            left: rem(2px);
+            right: rem(2px);
+            margin-bottom: 0;
+            padding: rem(13px) rem(12px) rem(5px);
+            line-height: 1;
+            font-size: rem(13px);
+            font-weight: $font-weight-base;
+            color: $blue;
+            background-color: $off-white-dark;
+            border-top-left-radius: rem(4px);
+            border-top-right-radius: rem(4px);
 
-                @media (prefers-contrast: high) {
-                    background-color: $white;
-                }
+            @media (prefers-contrast: high) {
+                background-color: $white;
             }
         }
+    }
 
-        &--inline #{$c} {
-            display: inline-block;
-            margin-bottom: 0;
-        }
+    .field--inline & {
+        flex-shrink: 0;
+        margin-bottom: 0;
     }
 }
 
+// The following input types should preferably not be targeted, but are with the current selector: button, checkbox, color, file, hidden, image, radio, range, reset & submit.
 input,
-.input {
-    $c: &;
+textarea {
+    width: 100%;
+    padding: rem(12px);
+    line-height: $line-height-base;
+    font-size: $font-size-base;
+    background-color: $off-white-dark;
+    border: rem(2px) solid $off-white-dark;
+    border-radius: rem(4px);
+    transition: border-color $transition-base;
 
-    &[type="date"],
-    &[type="datetime"],
-    &[type="datetime-local"],
-    &[type="email"],
-    &[type="month"],
-    &[type="number"],
-    &[type="password"],
-    &[type="search"],
-    &[type="tel"],
-    &[type="text"],
-    &[type="time"],
-    &[type="url"],
-    &[type="week"] {
-        width: 100%;
-        padding: rem(12px);
-        line-height: $line-height-base;
-        font-size: $font-size-base;
-        background-color: $off-white-dark;
-        border: rem(2px) solid $off-white-dark;
-        border-radius: rem(4px);
-        transition: border-color $transition-base;
-
-        @media (prefers-contrast: high) {
-            background-color: $white;
-            border-color: $black;
-        }
+    @media (prefers-contrast: high) {
+        background-color: $white;
+        border-color: $black;
     }
 
     &:focus {
@@ -72,6 +64,37 @@ input,
         outline: none;
     }
 
+    .field--ifl & {
+        .js & {
+            padding-top: rem(31px);
+            padding-bottom: rem(8px);
+        }
+    }
+
+    .field--inline label + & {
+        margin-left: rem(8px);
+    }
+
+    //
+    // Input placeholder styling
+    &::-webkit-input-placeholder {
+        color: $gray;
+    }
+
+    &::-moz-placeholder {
+        color: $gray;
+    }
+
+    &:-ms-input-placeholder {
+        color: $gray;
+    }
+
+    &::placeholder {
+        color: $gray;
+    }
+}
+
+input {
     //
     // Reset default :invalid styles.
     // General (IE, maybe more)
@@ -95,60 +118,21 @@ input,
         }
     }
 
-    @at-root .field {
-        &--ifl #{$c} {
-            .js & {
-                height: rem(69px); // Setting a fixed height is sadly the only way to guarantee consistent appearance across browsers.
-                padding-top: rem(31px);
-                padding-bottom: rem(8px);
-            }
-        }
-
-        &--inline #{$c} {
-            display: inline-block;
-
-            &[inputmode="numeric"] {
-                width: rem(64px);
-            }
-
-            @at-root .field--inline label + #{$c} {
-                margin-left: rem(8px);
-            }
+    .field--ifl & {
+        .js & {
+            height: rem(69px); // Setting a fixed height is sadly the only way to guarantee consistent appearance across browsers.
         }
     }
 
-    //
-    // Input placeholder styling
-    &::-webkit-input-placeholder {
-        color: $gray;
-    }
-
-    &::-moz-placeholder {
-        color: $gray;
-    }
-
-    &:-ms-input-placeholder {
-        color: $gray;
-    }
-
-    &::placeholder {
-        color: $gray;
+    .field--inline & {
+        &[inputmode="numeric"] {
+            width: rem(64px);
+        }
     }
 }
 
 textarea {
     display: block;
-}
-
-.field {
-    &--ifl {
-        position: relative;
-    }
-
-    &--inline {
-        display: flex;
-        align-items: center;
-    }
 }
 
 .btn {
@@ -183,46 +167,46 @@ textarea {
     }
 }
 
-.toggle {
-    position: relative;
-    width: 52px;
-    height: 32px;
-    background: linear-gradient(180deg, #2D2F39 0%, #1F2027 100%);
-    border: 2px solid #474755;
-    border-radius: 16px;
-    transition: all 0.2s ease;
-
-    @at-root input.toggle {
-        cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
-
-        &:focus {
-            outline: none;
-        }
-    }
-
-    &[type="checkbox"] {
-        appearance: none;
-    }
-
-    &:checked {
-        border-color: #654FEC;
-    }
-
-    &::after {
-        content: "";
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        width: 24px;
-        height: 24px;
-        background: white;
-        border-radius: 50%;
-        box-shadow: 0 1px 2px rgba(44, 44, 44, 0.2);
-        transition: all 0.2s cubic-bezier(0.5, 0.1, 0.75, 1.35);
-
-        @at-root .toggle:checked::after {
-            transform: translatex(20px);
-        }
-    }
-}
+// .toggle {
+//     position: relative;
+//     width: 52px;
+//     height: 32px;
+//     background: linear-gradient(180deg, #2D2F39 0%, #1F2027 100%);
+//     border: 2px solid #474755;
+//     border-radius: 16px;
+//     transition: all 0.2s ease;
+//
+//     @at-root input.toggle {
+//         cursor: pointer;
+//         -webkit-tap-highlight-color: transparent;
+//
+//         &:focus {
+//             outline: none;
+//         }
+//     }
+//
+//     &[type="checkbox"] {
+//         appearance: none;
+//     }
+//
+//     &:checked {
+//         border-color: #654FEC;
+//     }
+//
+//     &::after {
+//         content: "";
+//         position: absolute;
+//         top: 2px;
+//         left: 2px;
+//         width: 24px;
+//         height: 24px;
+//         background: white;
+//         border-radius: 50%;
+//         box-shadow: 0 1px 2px rgba(44, 44, 44, 0.2);
+//         transition: all 0.2s cubic-bezier(0.5, 0.1, 0.75, 1.35);
+//
+//         @at-root .toggle:checked::after {
+//             transform: translatex(20px);
+//         }
+//     }
+// }
