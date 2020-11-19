@@ -252,9 +252,6 @@
         return $output;
     }
 
-    // TODO
-    // Voeg .wpcf7-js-required toe aan wpcf7El (zodat je in CSS makkelijk een "Dit formulier heeft JavaScript nodig."-melding kan maken).
-
     /**
      * Validator
      */

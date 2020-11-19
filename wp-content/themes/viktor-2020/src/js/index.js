@@ -143,7 +143,7 @@ import stylesheet from "../scss/style.scss";
                 const alertType       = formStatus !== "mail_sent" ?
                                             "warning" : "success",
                       alertText       = e.detail.apiResponse.message,
-                      alertTimeoutDur = !debugMode.set ? 4000 : false;
+                      alertTimeoutDur = debugMode.set ? false : 4000;
 
                 new Noty({
                     type:    alertType,
