@@ -279,7 +279,10 @@
                 $tag->name = "captcha_resp";
 
                 $result->invalidate($tag, __("You didn't do any maths.", "contact-form-7-maths-captcha"));
-            } elseif ($digit1 + $digit2 != $answer) {
+            } elseif (
+                !$digit1 || !$digit2 ||
+                $digit1 + $digit2 !== $answer
+            ) {
                 // If this condition evaluates to true, the most obvious reason would be because a wrong answer is given.
                 // It however will also be true if either the form gets sent within the first 3 seconds after page load,
                 // or if a spam bot (/ human who is actively trying to break my site) fills in a value in the digit 1 and/or digit 2 field
