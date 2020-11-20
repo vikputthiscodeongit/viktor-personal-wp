@@ -1,3 +1,66 @@
+.form {
+    margin-top: rem(30px);
+
+    @include respond-above(md) {
+        margin-top: rem(40px);
+    }
+
+    &--contact {
+        max-width: rem(640px);
+
+        @include respond-above(xl) {
+            max-width: rem(800px);
+        }
+
+        @include respond-above(xxl) {
+            max-width: rem(880px);
+        }
+    }
+
+    &__group {
+        margin-top: rem(30px);
+
+        @include respond-above(md) {
+            margin-top: rem(40px);
+        }
+
+        &:first-child,
+        &.first-of-class {
+            margin-top: 0;
+        }
+
+        .wpcf7 & {
+            br {
+                display: none;
+            }
+
+            .wpcf7-not-valid-tip {
+                margin-top: rem(8px);
+            }
+        }
+    }
+
+    &__input {
+        &:focus {
+            .form__group.is-valid & {
+                border-color: $success;
+            }
+        }
+
+        .form.invalid .form__group.is-invalid & {
+            border-color: $warning;
+        }
+    }
+
+    &__ajax-loader {
+        font-size: rem(24px);
+
+        .form__group.field--inline & {
+            flex-shrink: 0;
+        }
+    }
+}
+
 .field {
     &--ifl {
         position: relative;
@@ -6,6 +69,18 @@
     &--inline {
         display: flex;
         align-items: center;
+    }
+
+    .form__group & {
+        margin-top: rem(20px);
+
+        @include respond-above(md) {
+            margin-top: rem(30px);
+        }
+
+        &:first-child {
+            margin-top: 0;
+        }
     }
 }
 
@@ -125,6 +200,7 @@ input {
     }
 
     .field--inline & {
+        &[type="number"],
         &[inputmode="numeric"] {
             width: rem(64px);
         }

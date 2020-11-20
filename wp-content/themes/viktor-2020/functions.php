@@ -238,15 +238,26 @@
         $sum = $digit1 + $digit2;
 
         $output = '
-        <input type="text" name="wpcf7-mc-d1" class="wpcf7-mc-h">
+        <div class="field field--inline">
+            <label for="wpcf7-mc-answer" class="form__label">' . $digit1 . ' + ' . $digit2 . ' =</label>
+            <input type="text" name="wpcf7-mc-answer" class="form__input" id="wpcf7-mc-answer" inputmode="numeric" pattern="[0-9]*" aria-required="true">
+            <span id="wpcf7-mc-answer-star">*</span>
+        </div>
 
-        <input type="text" name="wpcf7-mc-d2" class="wpcf7-mc-h">
+        <div class="field field--wpcf7-mc-h">
+            <label for="wpcf7-mc-d1" class="form__label">Calculation\'s first digit *</label>
+            <input type="text" name="wpcf7-mc-d1" class="form__input" id="wpcf7-mc-d1" inputmode="numeric">
+        </div>
 
-        <label for="wpcf7-mc-answer" class="form__label form__label--inline">' . $digit1 . ' + ' . $digit2 . ' =</label>
-        <input type="text" name="wpcf7-mc-answer" id="wpcf7-mc-answer" class="form__input form__input--numeric form__input--inline" inputmode="numeric" pattern="[0-9]*" aria-required="true">
-        <span id="wpcf7-mc-answer-star">*</span>
+        <div class="field field--wpcf7-mc-h">
+            <label for="wpcf7-mc-d2" class="form__label">Calculation\'s second digit *</label>
+            <input type="text" name="wpcf7-mc-d2" class="form__input" id="wpcf7-mc-d2" inputmode="numeric">
+        </div>
 
-        <input type="text" name="city" class="wpcf7-mc-h">
+        <div class="field field--wpcf7-mc-h">
+            <label for="city" class="form__label">Leave this field empty *</label>
+            <input type="text" name="city" class="form__input" id="city">
+        </div>
         ';
 
         return $output;
@@ -263,9 +274,9 @@
             $tag = new WPCF7_FormTag($tag);
             $tag->name = "captcha";
 
+            $answer = $_POST["wpcf7-mc-answer"];
             $digit1 = $_POST["wpcf7-mc-d1"];
             $digit2 = $_POST["wpcf7-mc-d2"];
-            $answer = $_POST["wpcf7-mc-answer"];
             $honeypot = $_POST["city"];
 
             if (!empty($honeypot)) {

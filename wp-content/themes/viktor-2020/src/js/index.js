@@ -183,17 +183,20 @@ import stylesheet from "../scss/style.scss";
 
         captcha: function(wpcf7El) {
             const wpcf7Form    = wpcf7El.querySelector(".wpcf7-form"),
+                  problem      = wpcf7Form.querySelector("label[for='wpcf7-mc-answer']"),
+                  star         = wpcf7Form.querySelector("#wpcf7-mc-answer-star"),
                   hiddenFields = wpcf7Form.querySelectorAll(".wpcf7-mc-h"),
-                  digitFields  = wpcf7Form.querySelectorAll("input[name^='wpcf7-mc-d'"),
-                  answer       = wpcf7Form.querySelector("label[for='wpcf7-mc-answer']"),
-                  star         = document.getElementById("wpcf7-mc-answer-star");
+                  digitFields  = wpcf7Form.querySelectorAll("input[name^='wpcf7-mc-d'");
+
+            star.style.cssText = "align-self: flex-start; margin-left: 0.333333rem;";
 
             hiddenFields.forEach(function(field) {
                 field.style.display = "none";
             });
 
+            const digits = problem.textContent.match(/[0-9]+/g);
+
             digitFields.forEach(function(field, i) {
-                let digits = answer.textContent.match(/[0-9]/g);
                 const targetDigit = digits[i];
 
                 // 3 seconds timeout because spambots fill in forms real fast and have probably already left the page by the time the value gets inserted in the DOM.
@@ -203,8 +206,6 @@ import stylesheet from "../scss/style.scss";
                     }
                 }, 3000);
             });
-
-            star.style.cssText = "display: inline-block; vertical-align: top; margin-left: 0.25rem; line-height: 1;";
         },
 
         htmlCleaner: function(wpcf7El) {
@@ -215,30 +216,30 @@ import stylesheet from "../scss/style.scss";
                 const br = group.querySelector("br");
 
                 if (br) {
-                    group.removeChild(br);
+                    br.parentNode.removeChild(br);
                 }
 
                 const controlWrap = group.querySelector(".wpcf7-form-control-wrap");
 
                 if (controlWrap) {
-                    const field = controlWrap.querySelector(".wpcf7-form-control");
+                    const input = controlWrap.querySelector(".wpcf7-form-control");
 
-                    group.insertBefore(field, controlWrap);
-                    group.removeChild(controlWrap);
+                    controlWrap.parentNode.insertBefore(input, controlWrap);
+                    controlWrap.parentNode.removeChild(controlWrap);
 
-                    !field.classList.contains("form__field--textarea") ?
-                        field.removeAttribute("size") :
-                        field.removeAttribute("cols");
+                    input.tagName === "TEXTAREA" ?
+                        input.removeAttribute("cols") :
+                        input.removeAttribute("size");
                 }
 
                 const ajaxLoader = group.querySelector(".ajax-loader");
 
                 if (ajaxLoader) {
-                    let loader = document.createElement("span");
+                    const loader = document.createElement("span");
+
                     loader.classList.add("loader");
 
                     ajaxLoader.appendChild(loader)
-
                     ajaxLoader.classList.remove("ajax-loader");
                     ajaxLoader.classList.add("form__ajax-loader");
                 }
