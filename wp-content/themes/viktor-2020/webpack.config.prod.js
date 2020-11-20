@@ -28,6 +28,11 @@ module.exports = {
     },
 
     plugins: [
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery"
+        }),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: "./css/style.css"
