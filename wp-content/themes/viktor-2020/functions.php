@@ -244,18 +244,18 @@
             <span id="wpcf7-mc-answer-star">*</span>
         </div>
 
-        <div class="field field--wpcf7-mc-h">
             <label for="wpcf7-mc-d1" class="form__label">Calculation\'s first digit *</label>
+        <div class="field field--inline wpcf7-mc-hf">
             <input type="text" name="wpcf7-mc-d1" class="form__input" id="wpcf7-mc-d1" inputmode="numeric">
         </div>
 
-        <div class="field field--wpcf7-mc-h">
             <label for="wpcf7-mc-d2" class="form__label">Calculation\'s second digit *</label>
+        <div class="field field--inline wpcf7-mc-hf">
             <input type="text" name="wpcf7-mc-d2" class="form__input" id="wpcf7-mc-d2" inputmode="numeric">
         </div>
 
-        <div class="field field--wpcf7-mc-h">
             <label for="city" class="form__label">Leave this field empty *</label>
+        <div class="field field--inline wpcf7-mc-hf">
             <input type="text" name="city" class="form__input" id="city">
         </div>
         ';

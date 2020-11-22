@@ -210,16 +210,16 @@ import stylesheet from "../scss/style.scss";
 
         htmlCleaner: function(wpcf7El) {
             const wpcf7Form = wpcf7El.querySelector(".wpcf7-form"),
-                  groups    = wpcf7Form.querySelectorAll(".form__group");
+                  fields    = wpcf7Form.querySelectorAll(".field");
 
-            groups.forEach(function(group) {
-                const br = group.querySelector("br");
+            fields.forEach(function(field) {
+                const br = field.querySelector("br");
 
                 if (br) {
                     br.parentNode.removeChild(br);
                 }
 
-                const controlWrap = group.querySelector(".wpcf7-form-control-wrap");
+                const controlWrap = field.querySelector(".wpcf7-form-control-wrap");
 
                 if (controlWrap) {
                     const input = controlWrap.querySelector(".wpcf7-form-control");
@@ -232,7 +232,7 @@ import stylesheet from "../scss/style.scss";
                         input.removeAttribute("size");
                 }
 
-                const ajaxLoader = group.querySelector(".ajax-loader");
+                const ajaxLoader = field.querySelector(".ajax-loader");
 
                 if (ajaxLoader) {
                     const spinner = document.createElement("span");

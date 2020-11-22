@@ -1,3 +1,13 @@
+.wpcf7-form {
+    label + br {
+        display: none;
+    }
+
+    .wpcf7-not-valid-tip {
+        margin-top: rem(8px);
+    }
+}
+
 .form {
     margin-top: rem(30px);
 
@@ -27,16 +37,6 @@
         &:first-child,
         &.first-of-class {
             margin-top: 0;
-        }
-
-        .wpcf7 & {
-            br {
-                display: none;
-            }
-
-            .wpcf7-not-valid-tip {
-                margin-top: rem(8px);
-            }
         }
     }
 
