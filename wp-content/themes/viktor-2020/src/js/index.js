@@ -141,13 +141,8 @@ import stylesheet from "../scss/style.scss";
         captcha: function(wpcf7El) {
             const wpcf7Form    = wpcf7El.querySelector(".wpcf7-form"),
                   problem      = wpcf7Form.querySelector("label[for='wpcf7-mc-answer']"),
-                  stars        = wpcf7Form.querySelectorAll(".wpcf7-mc-field-star"),
                   hiddenFields = wpcf7Form.querySelectorAll(".wpcf7-mc-hf"),
-                  digitFields  = wpcf7Form.querySelectorAll("input[name^='wpcf7-mc-d'], input[name='city']");
-
-            stars.forEach(function(star) {
-                star.style.cssText = "align-self: flex-start; margin-left: 0.333333rem;";
-            });
+                  digitInputs  = wpcf7Form.querySelectorAll("input[name^='wpcf7-mc-d'], input[name='city']");
 
             hiddenFields.forEach(function(field) {
                 field.style.display = "none";

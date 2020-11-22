@@ -240,26 +240,25 @@
         $output = '
         <div class="field field--inline">
             <label for="wpcf7-mc-answer" class="form__label">' . $digit1 . ' + ' . $digit2 . ' =</label>
-            <input type="text" name="wpcf7-mc-answer" class="form__input" id="wpcf7-mc-answer" inputmode="numeric" pattern="[0-9]*" aria-required="true">
+            <input type="text" name="wpcf7-mc-answer" class="wpcf7-validates-as-required form__input" id="wpcf7-mc-answer" inputmode="numeric" pattern="[0-9]*" aria-required="true">
             <span class="wpcf7-mc-field-star">*</span>
         </div>
 
         <div class="field field--inline wpcf7-mc-hf">
             <label for="wpcf7-mc-d1" class="form__label">First number of the sum</label>
-            <input type="text" name="wpcf7-mc-d1" class="form__input" id="wpcf7-mc-d1" inputmode="numeric">
+            <input type="text" name="wpcf7-mc-d1" class="wpcf7-validates-as-required form__input" id="wpcf7-mc-d1" inputmode="numeric">
             <span class="wpcf7-mc-field-star">*</span>
         </div>
 
         <div class="field field--inline wpcf7-mc-hf">
             <label for="wpcf7-mc-d2" class="form__label">Second number of the sum</label>
-            <input type="text" name="wpcf7-mc-d2" class="form__input" id="wpcf7-mc-d2" inputmode="numeric">
+            <input type="text" name="wpcf7-mc-d2" class="wpcf7-validates-as-required form__input" id="wpcf7-mc-d2" inputmode="numeric">
             <span class="wpcf7-mc-field-star">*</span>
         </div>
 
         <div class="field field--inline wpcf7-mc-hf">
             <label for="city" class="form__label">Leave this field empty</label>
             <input type="text" name="city" class="form__input" id="city">
-            <span class="wpcf7-mc-field-star">*</span>
         </div>
         ';
 

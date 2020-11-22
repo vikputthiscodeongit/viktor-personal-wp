@@ -1,10 +1,18 @@
-.wpcf7-form {
-    label + br {
-        display: none;
+.wpcf7 {
+    &-form {
+        label + br {
+            display: none;
+        }
     }
 
-    .wpcf7-not-valid-tip {
+    &-not-valid-tip {
         margin-top: rem(8px);
+    }
+
+    &-mc-field-star {
+        @extend label;
+        align-self: flex-start;
+        margin-left: rem(6px);
     }
 }
 
@@ -37,18 +45,6 @@
         &:first-child,
         &.first-of-class {
             margin-top: 0;
-        }
-    }
-
-    &__input {
-        &:focus {
-            .form__group.is-valid & {
-                border-color: $success;
-            }
-        }
-
-        .form.invalid .form__group.is-invalid & {
-            border-color: $warning;
         }
     }
 
@@ -137,6 +133,14 @@ textarea {
     &:focus {
         border-color: $blue;
         outline: none;
+
+        .field.is-valid & {
+            border-color: $success;
+        }
+    }
+
+    .form.invalid .field.is-invalid & {
+        border-color: $warning;
     }
 
     .field--ifl & {
