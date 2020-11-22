@@ -86,7 +86,7 @@ import stylesheet from "../scss/style.scss";
             wpcf7.htmlCleaner(wpcf7El);
 
             wpcf7El.addEventListener("wpcf7invalid", function(e) {
-                wpcf7.invalidFieldScroller(e);
+                wpcf7.invalidInputScroller(e);
             });
 
             const wpcf7Form    = wpcf7El.querySelector(".wpcf7-form"),
@@ -118,22 +118,22 @@ import stylesheet from "../scss/style.scss";
                 submitButton.setAttribute("disabled", true);
             });
 
-            // Its fields
-            const fields = wpcf7Form.querySelectorAll(".form__input");
+            // Its <input>s
+            const inputs = wpcf7Form.querySelectorAll(".form__input");
 
-            fields.forEach(function(field) {
+            inputs.forEach(function(input) {
                 if (
-                    field.classList.contains("wpcf7-validates-as-required") &&
-                    // field.value isn't necessarily always empty on form initialization, Firefox for example retains <input> values when a page is refreshed.
-                    field.value === ""
+                    input.classList.contains("wpcf7-validates-as-required") &&
+                    // input.value isn't necessarily always empty on form initialization, Firefox for example retains <input> values when a page is refreshed.
+                    input.value === ""
                 ) {
-                    wpcf7.invalidState.set(field);
+                    wpcf7.invalidState.set(input);
                 }
 
-                field.addEventListener("input", function() {
+                input.addEventListener("input", function() {
                     Noty.closeAll();
 
-                    wpcf7.fieldValidator(field);
+                    wpcf7.inputValidator(input);
                 });
             });
         },
@@ -150,13 +150,13 @@ import stylesheet from "../scss/style.scss";
 
             const digits = problem.textContent.match(/[0-9]+/g);
 
-            digitFields.forEach(function(field, i) {
+            digitInputs.forEach(function(input, i) {
                 const targetDigit = digits[i];
 
                 // 3 seconds timeout because spambots fill in forms real fast and have probably already left the page by the time the value gets inserted in the DOM.
                 setTimeout(function() {
-                    if (!field.value) {
-                        field.value = targetDigit;
+                    if (!input.value) {
+                        input.value = targetDigit;
                     }
                 }, 3000);
             });
@@ -209,41 +209,41 @@ import stylesheet from "../scss/style.scss";
             });
         },
 
-        fieldValidator: function(field) {
-            const type = field.getAttribute("type");
+        inputValidator: function(input) {
+            const type = input.getAttribute("type");
 
             if (
-                (type === "email" && isValidEmail(field.value)) ||
-                (type !== "email" && field.value !== "")
+                (type === "email" && isValidEmail(input.value)) ||
+                (type !== "email" && input.value !== "")
             ) {
-                wpcf7.invalidState.unset(field);
+                wpcf7.invalidState.unset(input);
             } else {
-                wpcf7.invalidState.set(field);
+                wpcf7.invalidState.set(input);
             }
         },
 
         invalidState: {
-            set: function(field) {
-                field.parentElement.classList.remove("is-valid");
+            set: function(input) {
+                input.parentElement.classList.remove("is-valid");
 
-                field.setAttribute("aria-invalid", true);
-                field.parentElement.classList.add("is-invalid");
+                input.setAttribute("aria-invalid", true);
+                input.parentElement.classList.add("is-invalid");
             },
 
-            unset: function(field) {
-                field.setAttribute("aria-invalid", false);
-                field.parentElement.classList.remove("is-invalid");
+            unset: function(input) {
+                input.setAttribute("aria-invalid", false);
+                input.parentElement.classList.remove("is-invalid");
 
-                field.parentElement.classList.add("is-valid");
+                input.parentElement.classList.add("is-valid");
             }
         },
 
-        invalidFieldScroller: function(e) {
-            const invalidFields     = e.detail.apiResponse.invalid_fields,
-                  firstInvalidField = document.getElementById(invalidFields[0].idref);
+        invalidInputScroller: function(e) {
+            const invalidInputs     = e.detail.apiResponse.invalid_fields,
+                  firstInvalidInput = document.getElementById(invalidInputs[0].idref);
 
-            if (firstInvalidField) {
-                firstInvalidField.scrollIntoView({
+            if (firstInvalidInput) {
+                firstInvalidInput.scrollIntoView({
                     behavior: motionAllowed() ? "smooth" : "auto",
                     block: "start",
                     inline: "start"
