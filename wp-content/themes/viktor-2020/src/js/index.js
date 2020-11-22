@@ -34,22 +34,15 @@ import stylesheet from "../scss/style.scss";
     //
     // For debugging purposes.
     let debugMode = {
-        set: process.env.NODE_ENV === "production" ? false : true,
+        isSet: process.env.NODE_ENV === "production" ? false : true,
 
-        createEl: function() {
-            const debugElWrapper = document.createElement("div");
-            debugElWrapper.classList.add("container");
+        setIndicator: function() {
+            const width = "0.125rem",
+                  style = "solid",
+                  color = "red";
 
-            const debugEl = document.createElement("div");
-            debugEl.classList.add("debug-el");
-
-            const debugElInner = document.createElement("p");
-            debugElInner.textContent = "! Debugging mode is enabled !";
-
-            debugElWrapper.appendChild(debugEl);
-            debugEl.appendChild(debugElInner);
-
-            document.body.insertBefore(debugElWrapper, document.body.firstElementChild);
+            document.body.style.borderLeft = width + " " + style + " " + color;
+            document.body.style.borderRight = document.body.style.borderLeft;
         }
     };
 
@@ -59,8 +52,8 @@ import stylesheet from "../scss/style.scss";
 
     html.className = html.className.replace("no-js", "js");
 
-    if (debugMode.set) {
-        debugMode.createEl();
+    if (debugMode.isSet) {
+        debugMode.setIndicator();
     }
 
     //
@@ -107,7 +100,7 @@ import stylesheet from "../scss/style.scss";
                 const alertType       = formStatus !== "mail_sent" ?
                                             "warning" : "success",
                       alertText       = e.detail.apiResponse.message,
-                      alertTimeoutDur = debugMode.set ? false : 4000;
+                      alertTimeoutDur = debugMode.isSet ? false : 4000;
 
                 new Noty({
                     type:    alertType,
