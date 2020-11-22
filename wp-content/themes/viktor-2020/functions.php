@@ -60,6 +60,9 @@
         remove_action("wp_head", array($sitepress, "meta_generator_tag", 20));
 
         add_action("wp_head", "generate_meta_description", 1);
+
+        // TODO: enqueue alleen het script dat nodig is, op de pagina waar het nodig is.
+        acf_enqueue_scripts();
     }
     add_action("after_setup_theme", "edit_wp_head");
 

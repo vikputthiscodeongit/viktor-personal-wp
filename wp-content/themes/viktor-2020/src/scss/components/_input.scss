@@ -216,6 +216,8 @@ textarea {
 }
 
 .btn {
+    display: inline-flex;
+    align-items: center;
     width: 100%;
     padding: $btn-padding-y $btn-padding-x;
     text-decoration: none;
@@ -244,6 +246,10 @@ textarea {
     &:focus {
         box-shadow: 0 0 rem(8px) rem(2px) rgba(0, 0, 0, 0.2);
         outline: none;
+    }
+
+    &:not(.is-submitting) .spinner {
+        display: none;
     }
 }
 

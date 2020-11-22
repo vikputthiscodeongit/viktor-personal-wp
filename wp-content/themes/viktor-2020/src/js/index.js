@@ -80,6 +80,8 @@ import stylesheet from "../scss/style.scss";
     // Contact Form 7
     let wpcf7 = {
         init: function(wpcf7El) {
+            console.log(acf.getField("options"));
+
             // The form itself
             wpcf7.captcha(wpcf7El);
 
@@ -90,7 +92,7 @@ import stylesheet from "../scss/style.scss";
             });
 
             const wpcf7Form    = wpcf7El.querySelector(".wpcf7-form"),
-                  submitButton = wpcf7Form.querySelector('[type="submit"]');
+                  submitButton = wpcf7Form.querySelector("[type='submit']");
 
             wpcf7El.addEventListener("wpcf7submit", function(e) {
                 // console.log(e);
@@ -112,10 +114,14 @@ import stylesheet from "../scss/style.scss";
                 }).show();
 
                 submitButton.removeAttribute("disabled");
+                submitButton.classList.remove("is-submitting");
             });
 
             wpcf7Form.addEventListener("submit", function(e) {
                 submitButton.setAttribute("disabled", true);
+                submitButton.classList.add("is-submitting");
+
+                submitButton.firstElementChild.textContent = "Sending";
             });
 
             // Its <input>s
@@ -189,13 +195,14 @@ import stylesheet from "../scss/style.scss";
                 const ajaxLoader = field.querySelector(".ajax-loader");
 
                 if (ajaxLoader) {
-                    const spinner = document.createElement("span");
+                    ajaxLoader.parentNode.removeChild(ajaxLoader);
 
+                    const spinner = document.createElement("span");
                     spinner.classList.add("spinner");
 
-                    ajaxLoader.appendChild(spinner);
-                    ajaxLoader.classList.remove("ajax-loader");
-                    ajaxLoader.classList.add("form__ajax-loader");
+                    const submitButton = wpcf7Form.querySelector("[type='submit']");
+
+                    submitButton.appendChild(spinner);
                 }
             });
 
