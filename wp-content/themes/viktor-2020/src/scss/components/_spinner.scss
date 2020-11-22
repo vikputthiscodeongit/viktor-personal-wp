@@ -1,12 +1,12 @@
 // https://projects.lukehaas.me/css-loaders/ - number 8 with some improvements
-.loader,
-.loader::after {
+.spinner,
+.spinner::after {
     width: 1em;
     height: 1em;
     border-radius: 50%;
 }
 
-.loader {
+.spinner {
     position: relative;
     display: block;
     font-size: 1em;

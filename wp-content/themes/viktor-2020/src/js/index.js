@@ -235,11 +235,11 @@ import stylesheet from "../scss/style.scss";
                 const ajaxLoader = group.querySelector(".ajax-loader");
 
                 if (ajaxLoader) {
-                    const loader = document.createElement("span");
+                    const spinner = document.createElement("span");
 
-                    loader.classList.add("loader");
+                    spinner.classList.add("spinner");
 
-                    ajaxLoader.appendChild(loader)
+                    ajaxLoader.appendChild(spinner);
                     ajaxLoader.classList.remove("ajax-loader");
                     ajaxLoader.classList.add("form__ajax-loader");
                 }
