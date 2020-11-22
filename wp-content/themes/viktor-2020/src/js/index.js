@@ -4,48 +4,13 @@ import stylesheet from "../scss/style.scss";
 
 (function() {
     // Generic helper functions
+    // Get CSS property value of given element.
+    // function cssValue(el, prop) {
+    //     const styles = window.getComputedStyle(el),
+    //           value  = styles.getPropertyValue(prop);
     //
-    function cssSecondDurationToMs(time) {
-        if (!/^((0\.){1}|([1-9]+\.*))+([0-9])*s$/.test(time)) {
-            console.error("Given time '" + time + "' is in an invalid format.");
-
-            return false;
-        }
-
-        // < 1
-        if (/^(0\.){1}([0-9])*s$/.test(time)) {
-            time = time.replace(/^(0\.){1}/, ""); // Remove everything before the dot
-            time = time.replace(/s{1}$/, "");	  // Remove the 's'
-
-            // Add zeroes
-            if (time.length < 3) {
-                do {
-                    time = time + "0";
-                } while (time.length < 3);
-            }
-
-            // Remove zeroes
-            if (time.length > 3) {
-                const reduceBy = time.length - (time.length - 3);
-
-                time = time.substring(0, reduceBy);
-            }
-        }
-
-    	// >= 1
-        if (/^([1-9]+\.*)+([0-9])*s$/.test(time)) {
-            const currentDotPos = time.search(/\.{1}/),
-                  newDotPos		= currentDotPos + 4;
-
-                time = time.replace(/s{1}$/, ""); 								// Remove the 's'
-                time = time + "000"; 											// Add zeroes
-                time = time.slice(0, newDotPos) + "." + time.slice(newDotPos);  // Move the dot 3 places to the right
-                time = time.replace(".", ""); 									// Remove the original dot
-                time = time.replace(/(\.[0-9]+)$/, ""); 						// Remove the new dot and all numbers that follow
-        }
-
-    	return parseInt(time);
-    }
+    //     return value;
+    // }
 
     // Check if viewport is wider than given breakpoint.
     // function aboveBreakpoint(breakpoint) {
@@ -84,8 +49,7 @@ import stylesheet from "../scss/style.scss";
             debugElWrapper.appendChild(debugEl);
             debugEl.appendChild(debugElInner);
 
-            const main = document.querySelector("main");
-            main.insertBefore(debugElWrapper, main.firstElementChild);
+            document.body.insertBefore(debugElWrapper, document.body.firstElementChild);
         }
     };
 
