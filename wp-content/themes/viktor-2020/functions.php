@@ -52,10 +52,11 @@
     //
     //
     function edit_wp_head() {
-        remove_action("wp_head", "wp_generator");
         remove_action("wp_head", "rsd_link");
         remove_action("wp_head", "wlwmanifest_link");
+        remove_action("wp_head", "wp_generator");
 
+        // WPML
         global $sitepress;
         remove_action("wp_head", array($sitepress, "meta_generator_tag", 20));
 
@@ -145,7 +146,7 @@
 
 
     //
-    // Remove meta boxes
+    // Remove meta boxes from the editor
     function remove_meta_boxes() {
         remove_post_type_support("page", "page-attributes");
     }
@@ -165,17 +166,6 @@
         ));
     }
     add_action("after_setup_theme", "register_custom_nav_menus");
-
-
-    //
-    // Deregister default scripts
-    // function remove_scripts() {
-    //     if (!is_admin()) {
-    //         wp_dequeue_script("jquery");
-    //         wp_deregister_script("jquery");
-    //     }
-    // }
-    // add_action("wp_enqueue_scripts", "remove_scripts");
 
 
     //
