@@ -121,7 +121,7 @@
 
         // WordPress Core
         $wp_admin_bar->remove_menu("wp-logo"); // WordPress logo & its sub-menu items
-        $wp_admin_bar->remove_menu("comments"); // Comments
+        // $wp_admin_bar->remove_menu("comments"); // Comments
         $wp_admin_bar->remove_menu("new-user"); // New - user
 
         // Plugins
