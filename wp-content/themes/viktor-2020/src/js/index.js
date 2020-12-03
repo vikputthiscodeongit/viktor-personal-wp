@@ -133,7 +133,7 @@ import stylesheet from "../scss/style.scss";
                     // input.value isn't necessarily always empty on form initialization, Firefox for example retains <input> values when a page is refreshed.
                     input.value === ""
                 ) {
-                    wpcf7.invalidState.set(input);
+                    wpcf7.setInvalidState(input);
                 }
 
                 input.addEventListener("input", function() {
@@ -223,25 +223,9 @@ import stylesheet from "../scss/style.scss";
                 (type === "email" && isValidEmail(input.value)) ||
                 (type !== "email" && input.value !== "")
             ) {
-                wpcf7.invalidState.unset(input);
+                wpcf7.unsetInvalidState(input);
             } else {
-                wpcf7.invalidState.set(input);
-            }
-        },
-
-        invalidState: {
-            set: function(input) {
-                input.parentElement.classList.remove("is-valid");
-
-                input.setAttribute("aria-invalid", true);
-                input.parentElement.classList.add("is-invalid");
-            },
-
-            unset: function(input) {
-                input.setAttribute("aria-invalid", false);
-                input.parentElement.classList.remove("is-invalid");
-
-                input.parentElement.classList.add("is-valid");
+                wpcf7.setInvalidState(input);
             }
         },
 
@@ -256,6 +240,20 @@ import stylesheet from "../scss/style.scss";
                     inline: "start"
                 });
             }
+        },
+
+        setInvalidState: function(input) {
+            input.parentElement.classList.remove("is-valid");
+
+            input.setAttribute("aria-invalid", true);
+            input.parentElement.classList.add("is-invalid");
+        },
+
+        unsetInvalidState: function(input) {
+            input.setAttribute("aria-invalid", false);
+            input.parentElement.classList.remove("is-invalid");
+
+            input.parentElement.classList.add("is-valid");
         }
     };
 }());
