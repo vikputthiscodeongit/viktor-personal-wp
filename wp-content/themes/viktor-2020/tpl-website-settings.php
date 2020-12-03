@@ -27,25 +27,21 @@
             <li class="site-settings__item">
                 <label for="setting-dark-theme"><?php echo $site_settings["dark_theme"];?></label>
                 <input type="checkbox" class="toggle" id="setting-dark-theme">
-                </button>
             </li>
 
             <li class="site-settings__item">
                 <label for="setting-reduced-motion"><?php echo $site_settings["reduced_motion"];?></label>
                 <input type="checkbox" class="toggle" id="setting-reduced-motion">
-                </button>
             </li>
 
             <li class="site-settings__item">
                 <label for="setting-increased-contrast"><?php echo $site_settings["increased_contrast"];?></label>
                 <input type="checkbox" class="toggle" id="setting-increased-contrast">
-                </button>
             </li>
 
             <li class="site-settings__item">
                 <label for="setting-site-header-auto-hide"><?php echo $site_settings["site_header_auto_hide"];?></label>
                 <input type="checkbox" class="toggle" id="setting-site-header-auto-hide">
-                </button>
             </li>
 
             <li class="site-settings__item">
