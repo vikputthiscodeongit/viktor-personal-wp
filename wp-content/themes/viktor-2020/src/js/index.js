@@ -85,7 +85,7 @@ import stylesheet from "../scss/style.scss";
             // The form itself
             wpcf7.captcha(wpcf7El);
 
-            wpcf7.htmlCleaner(wpcf7El);
+            wpcf7.formTransformer(wpcf7El);
 
             wpcf7El.addEventListener("wpcf7invalid", function(e) {
                 wpcf7.invalidInputScroller(e);
@@ -168,7 +168,7 @@ import stylesheet from "../scss/style.scss";
             });
         },
 
-        htmlCleaner: function(wpcf7El) {
+        formTransformer: function(wpcf7El) {
             const wpcf7Form = wpcf7El.querySelector(".wpcf7-form"),
                   fields    = wpcf7Form.querySelectorAll(".field");
 
