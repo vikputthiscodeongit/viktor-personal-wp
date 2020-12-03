@@ -80,8 +80,6 @@ import stylesheet from "../scss/style.scss";
     // Contact Form 7
     let wpcf7 = {
         init: function(wpcf7El) {
-            console.log(acf.getField("options"));
-
             // The form itself
             wpcf7.captcha(wpcf7El);
 
@@ -91,11 +89,28 @@ import stylesheet from "../scss/style.scss";
                 wpcf7.invalidInputScroller(e);
             });
 
-            const wpcf7Form    = wpcf7El.querySelector(".wpcf7-form"),
-                  submitButton = wpcf7Form.querySelector("[type='submit']");
+            const wpcf7Form        = wpcf7El.querySelector(".wpcf7-form"),
+                  submitButton     = wpcf7Form.querySelector("[type='submit']"),
+                  submitButtonText = submitButton.querySelector(".btn__text");
+
+            wpcf7El.addEventListener("wpcf7beforesubmit", function(e) {
+                console.log(e);
+
+                if (!submitButton.hasAttribute("data-string-send")) {
+                    submitButton.setAttribute(
+                        "data-string-send",
+                        submitButtonText.textContent
+                    );
+                }
+                submitButton.setAttribute("disabled", true);
+                submitButton.classList.add("is-submitting");
+
+                submitButtonText.textContent =
+                    submitButton.getAttribute("data-string-sending");
+            });
 
             wpcf7El.addEventListener("wpcf7submit", function(e) {
-                // console.log(e);
+                console.log(e);
 
                 const formStatus = e.detail.status;
 
@@ -115,13 +130,9 @@ import stylesheet from "../scss/style.scss";
 
                 submitButton.removeAttribute("disabled");
                 submitButton.classList.remove("is-submitting");
-            });
 
-            wpcf7Form.addEventListener("submit", function(e) {
-                submitButton.setAttribute("disabled", true);
-                submitButton.classList.add("is-submitting");
-
-                submitButton.firstElementChild.textContent = "Sending";
+                submitButtonText.textContent =
+                    submitButton.getAttribute("data-string-send");
             });
 
             // Its <input>s
@@ -200,7 +211,7 @@ import stylesheet from "../scss/style.scss";
                     ajaxLoader.parentNode.removeChild(ajaxLoader);
 
                     const spinner = document.createElement("span");
-                    spinner.classList.add("spinner");
+                    spinner.classList.add("btn__spinner");
 
                     const submitButton = wpcf7Form.querySelector("[type='submit']");
 

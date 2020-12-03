@@ -248,8 +248,10 @@ textarea {
         outline: none;
     }
 
-    &:not(.is-submitting) .spinner {
-        display: none;
+    &__spinner {
+        &:not(.is-submitting) & {
+            display: none;
+        }
     }
 }
 
