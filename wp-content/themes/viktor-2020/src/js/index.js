@@ -148,7 +148,9 @@ import stylesheet from "../scss/style.scss";
             const wpcf7Form    = wpcf7El.querySelector(".wpcf7-form"),
                   problem      = wpcf7Form.querySelector("label[for='wpcf7-mc-answer']"),
                   hiddenFields = wpcf7Form.querySelectorAll(".wpcf7-mc-hf"),
-                  digitInputs  = wpcf7Form.querySelectorAll("input[name^='wpcf7-mc-d'], input[name='city']");
+                  digitInputs  = wpcf7Form.querySelectorAll(
+                      "input[name^='wpcf7-mc-d'], input[name='city']"
+                  );
 
             hiddenFields.forEach(function(field) {
                 field.style.display = "none";
