@@ -21,6 +21,10 @@ function wpcf7_submit_form_tag_handler( $tag ) {
 	$atts['class'] = $tag->get_class_option( $class );
 	$atts['id'] = $tag->get_id_option();
 	$atts['tabindex'] = $tag->get_option( 'tabindex', 'signed_int', true );
+	$atts['data-string-send'] = $tag->get_option( 'string-send', '', true );
+	$atts['data-string-sending'] = empty( $tag->values )
+		? $tag->get_option( 'string-sending', '', true )
+		: (string) reset( $tag->values );
 
 	$value = isset( $tag->values[0] ) ? $tag->values[0] : '';
 
@@ -31,9 +35,11 @@ function wpcf7_submit_form_tag_handler( $tag ) {
 	$atts['type'] = 'submit';
 	$atts['value'] = $value;
 
+	$text = $atts['data-string-send'];
+
 	$atts = wpcf7_format_atts( $atts );
 
-	$html = sprintf( '<input %1$s />', $atts );
+	$html = sprintf( '<button %1$s aria-live="polite"><span class="btn__text">%2$s</span></button>', $atts, $text );
 
 	return $html;
 }

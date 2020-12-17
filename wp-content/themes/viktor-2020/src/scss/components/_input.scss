@@ -14,6 +14,10 @@
         align-self: flex-start;
         margin-left: rem(6px);
     }
+
+    .wpcf7-submit + .ajax-loader {
+        margin-left: rem(8px);
+    }
 }
 
 .form {
@@ -249,7 +253,9 @@ textarea {
     }
 
     &__spinner {
-        &:not(.is-submitting) & {
+        margin-left: rem(8px);
+
+        .btn:not(.is-submitting) & {
             display: none;
         }
     }

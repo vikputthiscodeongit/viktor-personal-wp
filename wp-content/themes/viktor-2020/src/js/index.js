@@ -211,7 +211,7 @@ import stylesheet from "../scss/style.scss";
                     ajaxLoader.parentNode.removeChild(ajaxLoader);
 
                     const spinner = document.createElement("span");
-                    spinner.classList.add("btn__spinner");
+                    spinner.className += ("btn__spinner spinner spinner--light");
 
                     const submitButton = wpcf7Form.querySelector("[type='submit']");
 
