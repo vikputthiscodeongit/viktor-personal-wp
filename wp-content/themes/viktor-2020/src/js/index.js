@@ -94,8 +94,6 @@ import stylesheet from "../scss/style.scss";
                   submitButtonText = submitButton.querySelector(".btn__text");
 
             wpcf7El.addEventListener("wpcf7beforesubmit", function(e) {
-                console.log(e);
-
                 if (!submitButton.hasAttribute("data-string-send")) {
                     submitButton.setAttribute(
                         "data-string-send",
@@ -110,8 +108,6 @@ import stylesheet from "../scss/style.scss";
             });
 
             wpcf7El.addEventListener("wpcf7submit", function(e) {
-                console.log(e);
-
                 const formStatus = e.detail.status;
 
                 const alertType       = formStatus !== "mail_sent" ?
