@@ -178,6 +178,11 @@ textarea {
 }
 
 input {
+    &[type="checkbox"],
+    &[type="radio"] {
+        width: auto;
+    }
+
     //
     // Reset default :invalid styles.
     // General (IE, maybe more)

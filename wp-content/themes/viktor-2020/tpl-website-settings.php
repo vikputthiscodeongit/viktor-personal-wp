@@ -23,7 +23,10 @@
             }
         ?>
 
-        <ul class="site-settings" aria-label="<?php echo $site_settings["label"]; ?>">
+        <?php
+            $label = get_the_content();
+        ?>
+        <ul class="site-settings" <?php if (!empty($label)) { echo 'aria-label="' . $label . '"'; } ?>>
             <li class="site-settings__item">
                 <label for="setting-dark-theme"><?php echo $site_settings["dark_theme"];?></label>
                 <input type="checkbox" class="toggle" id="setting-dark-theme">
@@ -46,12 +49,17 @@
 
             <li class="site-settings__item">
                 <label for="setting-dark-theme"><?php echo $site_settings["lang_select"];?></label>
-                <span>LANGUAGE SWITCHER</span>
+                <?php do_action('wpml_add_language_selector'); ?>
             </li>
         </ul>
 
         <div>
-            <!-- Get title of page "website information". -->
+            <?php
+                $post_id = apply_filters("wpml_object_id", 100, "post");
+                $link_href = get_permalink($post_id);
+                $link_text = get_the_title($post_id);
+            ?>
+            <a href="<?php echo $link_href; ?>" target="_self"><?php echo $link_text; ?></a>
         </div>
     </div>
 </section>
