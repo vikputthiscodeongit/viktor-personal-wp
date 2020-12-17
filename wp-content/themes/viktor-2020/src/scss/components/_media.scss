@@ -23,4 +23,12 @@ img {
             margin-top: rem(20px);
         }
     }
+
+    .media + & {
+        margin-top: rem(30px);
+
+        @include respond-above(md) {
+            margin-top: rem(40px);
+        }
+    }
 }
