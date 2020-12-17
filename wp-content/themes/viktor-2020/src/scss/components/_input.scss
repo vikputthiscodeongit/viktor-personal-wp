@@ -27,18 +27,6 @@
         margin-top: rem(40px);
     }
 
-    &--contact {
-        max-width: rem(640px);
-
-        @include respond-above(xl) {
-            max-width: rem(800px);
-        }
-
-        @include respond-above(xxl) {
-            max-width: rem(880px);
-        }
-    }
-
     &__group {
         margin-top: rem(30px);
 
@@ -62,6 +50,16 @@
 }
 
 .field {
+    max-width: $input-max-width;
+
+    @include respond-above(xl) {
+        max-width: $input-xl-max-width;
+    }
+
+    @include respond-above(xxl) {
+        max-width: $input-xxl-max-width;
+    }
+
     &--ifl {
         position: relative;
     }
@@ -95,6 +93,7 @@ label {
             top: rem(2px);
             left: rem(2px);
             right: rem(2px);
+            z-index: 1;
             margin-bottom: 0;
             padding: rem(13px) rem(12px) rem(5px);
             line-height: 1;
